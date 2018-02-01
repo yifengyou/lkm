@@ -1,2 +1,0 @@
-[  682.298747] <0>calling sys_mkdir --hook_sys_mkdir
-[  687.520927] <0>rm hook success!
