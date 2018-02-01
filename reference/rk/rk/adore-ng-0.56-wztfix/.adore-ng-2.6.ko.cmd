@@ -1,0 +1,1 @@
+cmd_/home/user/rk/adore-ng-0.56-wztfix/adore-ng-2.6.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-2.6.38-8-generic/scripts/module-common.lds --build-id  -o /home/user/rk/adore-ng-0.56-wztfix/adore-ng-2.6.ko /home/user/rk/adore-ng-0.56-wztfix/adore-ng-2.6.o /home/user/rk/adore-ng-0.56-wztfix/adore-ng-2.6.mod.o

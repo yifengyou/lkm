@@ -1,0 +1,1 @@
+cmd_/root/lkm/reference/rootkit-sample-code/tutorial-two/idt3/sys_mkdir.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /root/lkm/reference/rootkit-sample-code/tutorial-two/idt3/sys_mkdir.ko /root/lkm/reference/rootkit-sample-code/tutorial-two/idt3/sys_mkdir.o /root/lkm/reference/rootkit-sample-code/tutorial-two/idt3/sys_mkdir.mod.o

@@ -1,0 +1,3 @@
+[  111.790871] hook_sys_mkdir: module verification failed: signature and/or required key missing - tainting kernel
+[  114.487323] <0>calling sys_mkdir --hook_sys_mkdir
+[  119.041045] <0>rm hook success!

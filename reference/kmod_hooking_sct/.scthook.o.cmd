@@ -1,0 +1,1 @@
+cmd_/root/lkm/reference/kmod_hooking_sct/scthook.o := ld -m elf_i386   -r -o /root/lkm/reference/kmod_hooking_sct/scthook.o /root/lkm/reference/kmod_hooking_sct/entry.o /root/lkm/reference/kmod_hooking_sct/trace.o /root/lkm/reference/kmod_hooking_sct/libudis86/built-in.o /root/lkm/reference/kmod_hooking_sct/entry_32.o 

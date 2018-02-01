@@ -1,0 +1,30 @@
+[  449.154411] BUG: unable to handle kernel paging request at c1175cac
+[  449.154530] IP: [<f844305e>] init_module2+0x1e/0x30 [sys_mkdir]
+[  449.154605] *pdpt = 0000000001a90001 *pde = 00000000010001e1 
+[  449.154702] Oops: 0003 [#2] SMP 
+[  449.154775] Modules linked in: sys_mkdir(OF+) sys_open(POF+) crc32_pclmul aesni_intel aes_i586 xts lrw gf128mul ablk_helper cryptd vmw_vmci vmw_balloon parport_pc ppdev serio_raw lp parport psmouse ahci mptspi pcnet32 libahci mptscsih mii mptbase
+[  449.155345] CPU: 3 PID: 5571 Comm: insmod Tainted: PF     D    O 3.13.0-24-generic #47-Ubuntu
+[  449.155431] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/19/2017
+[  449.155528] task: f50b26d0 ti: ecef4000 task.ti: ecef4000
+[  449.155584] EIP: 0060:[<f844305e>] EFLAGS: 00010246 CPU: 3
+[  449.155641] EIP is at init_module2+0x1e/0x30 [sys_mkdir]
+[  449.155704] EAX: 00000000 EBX: 00000000 ECX: 00000000 EDX: 00340770
+[  449.155765] ESI: f8443040 EDI: 000002dd EBP: ecef5dfc ESP: ecef5dfc
+[  449.155825]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[  449.155881] CR0: 80050033 CR2: c1175cac CR3: 2cefc000 CR4: 003407f0
+[  449.155984] Stack:
+[  449.156022]  ecef5e78 c1002122 00000000 00000000 80000000 00000000 00000000 00000001
+[  449.156227]  00000001 000353f1 00000000 00000000 00000000 f8438000 00000000 000002dd
+[  449.156423]  ecef5e64 c104c87f 00000000 80000000 00000000 00000000 00000000 00000000
+[  449.156620] Call Trace:
+[  449.156671]  [<c1002122>] do_one_initcall+0xd2/0x190
+[  449.156737]  [<c104c87f>] ? set_memory_nx+0x5f/0x70
+[  449.156795]  [<c164769a>] ? set_section_ro_nx+0x54/0x59
+[  449.156862]  [<c10c3e9a>] load_module+0x111a/0x18e0
+[  449.156918]  [<c10c47c5>] SyS_finit_module+0x75/0xc0
+[  449.156974]  [<c11396db>] ? vm_mmap_pgoff+0x7b/0xa0
+[  449.157029]  [<c1659bcd>] sysenter_do_call+0x12/0x28
+[  449.157084] Code: c3 8d b6 00 00 00 00 8d bf 00 00 00 00 55 89 e5 3e 8d 74 26 00 c7 05 80 51 44 f8 10 5c 17 c1 a1 ac 5c 17 c1 a3 84 51 44 f8 31 c0 <c7> 05 ac 5c 17 c1 00 30 44 f8 5d c3 8d b6 00 00 00 00 55 89 e5
+[  449.158299] EIP: [<f844305e>] init_module2+0x1e/0x30 [sys_mkdir] SS:ESP 0068:ecef5dfc
+[  449.158415] CR2: 00000000c1175cac
+[  449.158461] ---[ end trace 239c06a52829a4ed ]---

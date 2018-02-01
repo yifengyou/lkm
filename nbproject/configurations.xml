@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="/root/lkm" name="0">
+      <df name="research-rootkit-master">
+        <df name="1-sys_call_table">
+          <df name="psmon">
+            <in>psmon.c</in>
+          </df>
+        </df>
+      </df>
+      <in>Rtcmd.c</in>
+      <in>Rtcmd.h</in>
+      <in>Rtlist.c</in>
+      <in>Rtlist.h</in>
+      <in>Rtonline.c</in>
+      <in>Rtonline.h</in>
+      <in>Rtpath.c</in>
+      <in>Rtpath.h</in>
+      <in>Rtstring.c</in>
+      <in>Rtstring.h</in>
+      <in>Rtsyscall.c</in>
+      <in>Rtsyscall.h</in>
+      <in>Rtwrite.c</in>
+      <in>Rtwrite.h</in>
+      <in>rootkit.mod.c</in>
+      <in>syscalltable.c</in>
+      <in>syscalltable.h</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="重要文件"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>/root/lkm//root/lkm/Makefile</itemPath>
+      <itemPath>/root/lkm//root/lkm/nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>/root/lkm</Elem>
+  </sourceRootList>
+  <projectmakefile>/root/lkm//root/lkm/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>/root/lkm//root/lkm</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="/root/lkm/Rtcmd.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtcmd.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtlist.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtlist.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtonline.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtonline.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtpath.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtpath.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtstring.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtstring.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtsyscall.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtsyscall.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtwrite.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/Rtwrite.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="/root/lkm/rootkit.mod.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/syscalltable.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="/root/lkm/syscalltable.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="0">
+        <cTool>
+          <incDir>
+            <pElem>/root/lkm//root/lkm/research-rootkit-master</pElem>
+          </incDir>
+          <incFile>
+            <pElem>/root/lkm//root/lkm/research-rootkit-master/zeroevil/zeroevil.h</pElem>
+            <pElem>/root/lkm//root/lkm/research-rootkit-master/zeroevil/structs.h</pElem>
+          </incFile>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>/root/lkm//root/lkm/research-rootkit-master</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/research-rootkit-master">
+        <cTool>
+          <incDir>
+            <pElem>/root/lkm//root/lkm/research-rootkit-master</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>

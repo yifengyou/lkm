@@ -1,0 +1,1 @@
+cmd_/root/lkm/reference/inl_hook/hello.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.13.0-24-generic/scripts/module-common.lds --build-id  -o /root/lkm/reference/inl_hook/hello.ko /root/lkm/reference/inl_hook/hello.o /root/lkm/reference/inl_hook/hello.mod.o

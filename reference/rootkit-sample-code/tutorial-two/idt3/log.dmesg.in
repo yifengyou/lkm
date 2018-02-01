@@ -1,0 +1,82 @@
+[  232.648828] try to enable write
+[  232.648900] Arciryas:module removed
+[  296.158679] Arciryas:idt table-0xfffba000
+[  296.158747] Arciryas:sys_call_table-0xc165e140
+[  296.158798] try  to disable write
+[  296.158845] Arciryas:module loaded
+[  308.990059] BUG: unable to handle kernel paging request at bffa2871
+[  308.990176] IP: [<c12f8f5e>] strnlen+0xe/0x20
+[  308.990245] *pdpt = 000000002d274001 *pde = 000000007f81d067 
+[  308.990332] Oops: 0001 [#2] SMP 
+[  308.990405] Modules linked in: lkm3(POF) crc32_pclmul aesni_intel aes_i586 xts lrw gf128mul ablk_helper cryptd parport_pc ppdev lp vmw_balloon serio_raw vmw_vmci parport psmouse ahci libahci mptspi mptscsih pcnet32 mptbase mii [last unloaded: lkm3]
+[  308.990972] CPU: 3 PID: 3351 Comm: mkdir Tainted: PF     D    O 3.13.0-24-generic #47-Ubuntu
+[  308.991056] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/19/2017
+[  308.991194] task: f2afa6d0 ti: e8446000 task.ti: e8446000
+[  308.991251] EIP: 0060:[<c12f8f5e>] EFLAGS: 00010097 CPU: 3
+[  308.991318] EIP is at strnlen+0xe/0x20
+[  308.991364] EAX: bffa2871 EBX: c1aa9e2f ECX: bffa2871 EDX: fffffffe
+[  308.991425] ESI: bffa2871 EDI: c1aaa200 EBP: e8447ec8 ESP: e8447ec8
+[  308.991510]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[  308.991567] CR0: 80050033 CR2: bffa2871 CR3: 2d3dc000 CR4: 003407f0
+[  308.991655] Stack:
+[  308.991693]  e8447ee0 c12f5e4f 0000ffff e8447fa4 f848e035 c1aa9e2f e8447f24 c12f7196
+[  308.991890]  00000000 ee48ffff 0000ffff 00000000 00000000 fff7d260 c1aa9e20 000003e0
+[  308.992088]  c1aaa200 00000002 ff0a0004 ffffffff 000003e0 00000003 00000000 e8447f34
+[  308.992289] Call Trace:
+[  308.992335]  [<c12f5e4f>] string.isra.6+0x2f/0xc0
+[  308.992389]  [<c12f7196>] vsnprintf+0x166/0x3d0
+[  308.992444]  [<c12f7416>] vscnprintf+0x16/0x30
+[  308.992498]  [<c10a3a64>] vprintk_emit+0x124/0x520
+[  308.992569]  [<c1647402>] printk+0x50/0x52
+[  308.992632]  [<f848d023>] fake_mkdir+0x23/0x40 [lkm3]
+[  308.992690]  [<c1659bcd>] sysenter_do_call+0x12/0x28
+[  308.992746] Code: 57 3e 8d 74 26 00 85 c9 89 c7 74 07 89 d0 f2 ae 75 01 4f 89 f8 5f 5d c3 90 8d 74 26 00 55 89 e5 3e 8d 74 26 00 89 c1 89 c8 eb 06 <80> 38 00 74 07 40 4a 83 fa ff 75 f4 29 c8 5d c3 90 90 55 89 e5
+[  308.993892] EIP: [<c12f8f5e>] strnlen+0xe/0x20 SS:ESP 0068:e8447ec8
+[  308.993993] CR2: 00000000bffa2871
+[  308.994042] ---[ end trace ff7b775ed0a18b1e ]---
+[  313.919708] try to enable write
+[  313.919766] Arciryas:module removed
+[ 1342.733682] rootkit:Enter init function
+[ 1342.733722] rootkit:idtr.base-0xfffba000
+[ 1342.733753] rootkit:idtr.limit-0x7ff
+[ 1342.733782] rootkit:pidt.off1-0x2948
+[ 1342.733811] rootkit:pidt.sel-0x60
+[ 1342.733838] rootkit:pidt.flags-0xef
+[ 1342.733867] rootkit:pidt.off2-0xc165
+[ 1342.733896] rootkit:rootkit:sys_call_off-0xc1652948
+[ 1342.733940] rootkit:find_sys_call_table1!!!find![0xc165e140]
+[ 1342.759412] rootkit:find_sys_call_table2!!!find![0xc165e140]
+[ 1342.759464] rootkit:sys_call_table = find_sys_call_table() finished!
+[ 1342.759517] rootkit:disable_write_protection
+[ 1342.759552] rootkit:enable_write_protection
+[ 1342.759584] rootkit:Leave init function
+[ 1351.829051] BUG: unable to handle kernel paging request at bfbff871
+[ 1351.829121] IP: [<c12f8f5e>] strnlen+0xe/0x20
+[ 1351.829163] *pdpt = 0000000032a20001 *pde = 000000007ee21067 
+[ 1351.829209] Oops: 0001 [#3] SMP 
+[ 1351.829242] Modules linked in: sys_mkdir(OF) crc32_pclmul aesni_intel aes_i586 xts lrw gf128mul ablk_helper cryptd parport_pc ppdev lp vmw_balloon serio_raw vmw_vmci parport psmouse ahci libahci mptspi mptscsih pcnet32 mptbase mii [last unloaded: lkm3]
+[ 1351.829476] CPU: 1 PID: 6502 Comm: mkdir Tainted: PF     D    O 3.13.0-24-generic #47-Ubuntu
+[ 1351.829546] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/19/2017
+[ 1351.829630] task: f51f19e0 ti: e8478000 task.ti: e8478000
+[ 1351.829672] EIP: 0060:[<c12f8f5e>] EFLAGS: 00010097 CPU: 1
+[ 1351.829716] EIP is at strnlen+0xe/0x20
+[ 1351.829749] EAX: bfbff871 EBX: c1aa9e2e ECX: bfbff871 EDX: fffffffe
+[ 1351.829796] ESI: bfbff871 EDI: c1aaa200 EBP: e8479ec8 ESP: e8479ec8
+[ 1351.829843]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[ 1351.829885] CR0: 80050033 CR2: bfbff871 CR3: 28449000 CR4: 003407f0
+[ 1351.829980] Stack:
+[ 1351.830004]  e8479ee0 c12f5e4f 0000ffff e8479fa8 f8433037 c1aa9e2e e8479f24 c12f7196
+[ 1351.830081]  00000000 e843ffff 0000ffff 00000000 00000000 fffa5260 c1aa9e20 000003e0
+[ 1351.830158]  c1aaa200 00000002 ff0a0004 ffffffff 000003e0 00000001 00000000 e8479f34
+[ 1351.830235] Call Trace:
+[ 1351.830265]  [<c12f5e4f>] string.isra.6+0x2f/0xc0
+[ 1351.830305]  [<c12f7196>] vsnprintf+0x166/0x3d0
+[ 1351.830344]  [<c12f7416>] vscnprintf+0x16/0x30
+[ 1351.830389]  [<c10a3a64>] vprintk_emit+0x124/0x520
+[ 1351.830431]  [<c1647402>] printk+0x50/0x52
+[ 1351.830468]  [<f8432027>] rt_sys_mkdir+0x27/0x40 [sys_mkdir]
+[ 1351.830514]  [<c1659bcd>] sysenter_do_call+0x12/0x28
+[ 1351.830554] Code: 57 3e 8d 74 26 00 85 c9 89 c7 74 07 89 d0 f2 ae 75 01 4f 89 f8 5f 5d c3 90 8d 74 26 00 55 89 e5 3e 8d 74 26 00 89 c1 89 c8 eb 06 <80> 38 00 74 07 40 4a 83 fa ff 75 f4 29 c8 5d c3 90 90 55 89 e5
+[ 1351.830767] EIP: [<c12f8f5e>] strnlen+0xe/0x20 SS:ESP 0068:e8479ec8
+[ 1351.830819] CR2: 00000000bfbff871
+[ 1351.830987] ---[ end trace ff7b775ed0a18b1f ]---

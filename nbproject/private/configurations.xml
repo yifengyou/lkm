@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="/root/lkm" name="0">
+      <df name=".tmp_versions">
+        <in>rootkit.mod</in>
+      </df>
+      <df name="back">
+      </df>
+      <df name="research-rootkit-master">
+        <df name="1-sys_call_table">
+          <df name="fshid">
+            <df name="zeroevil">
+            </df>
+            <in>fshid.c</in>
+          </df>
+          <df name="fsmon">
+            <df name="zeroevil">
+            </df>
+            <in>fsmon.c</in>
+          </df>
+          <df name="hello">
+            <df name="zeroevil">
+            </df>
+            <in>hello.c</in>
+          </df>
+          <df name="psmon">
+            <df name=".tmp_versions">
+              <in>psmonko.mod</in>
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>psmon.c</in>
+            <in>psmonko.mod.c</in>
+          </df>
+          <df name="sys_call_table">
+            <df name=".tmp_versions">
+              <in>sys_call_tableko.mod</in>
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>sys_call_table.c</in>
+            <in>sys_call_tableko.mod.c</in>
+          </df>
+          <df name="write_protection">
+            <df name=".tmp_versions">
+              <in>write_protectionko.mod</in>
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>write_protection.c</in>
+            <in>write_protectionko.mod.c</in>
+          </df>
+        </df>
+        <df name="2-fundamentals">
+          <df name="fshid">
+            <df name="test">
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>fshid.c</in>
+          </df>
+          <df name="kohid">
+            <df name="zeroevil">
+            </df>
+            <in>kohid.c</in>
+          </df>
+          <df name="komon">
+            <df name="test">
+              <df name="zeroevil">
+              </df>
+              <in>test.c</in>
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>komon.c</in>
+          </df>
+          <df name="pshid">
+            <df name="zeroevil">
+            </df>
+            <in>pshid.c</in>
+          </df>
+          <df name="pthid">
+            <df name="zeroevil">
+            </df>
+            <in>pthid.c</in>
+          </df>
+          <df name="root">
+            <df name="zeroevil">
+            </df>
+            <in>root.c</in>
+          </df>
+        </df>
+        <df name="3-persistence">
+          <df name="codeinj">
+            <df name="fshid">
+              <df name="test">
+              </df>
+              <df name="zeroevil">
+              </df>
+              <in>fshid.c</in>
+            </df>
+            <df name="zeroevil">
+            </df>
+            <in>codeinj.c</in>
+          </df>
+          <df name="elf">
+            <in>lssec.c</in>
+            <in>lssym.c</in>
+            <in>setsym.c</in>
+            <in>uelf.c</in>
+            <in>uelf.h</in>
+          </df>
+          <df name="noinj">
+            <df name="zeroevil">
+            </df>
+            <in>noinj.c</in>
+          </df>
+          <df name="real">
+            <df name="fshid">
+              <df name="test">
+              </df>
+              <df name="zeroevil">
+              </df>
+              <in>fshid.c</in>
+            </df>
+          </df>
+        </df>
+        <df name="4-entry_SYSCALL_64">
+          <df name="get">
+            <df name="zeroevil">
+            </df>
+            <in>get.c</in>
+          </df>
+          <df name="ifmon">
+            <df name="zeroevil">
+            </df>
+            <in>ifmon.c</in>
+          </df>
+          <df name="rec">
+            <df name="zeroevil">
+            </df>
+            <in>rec.c</in>
+          </df>
+          <df name="set">
+            <df name="zeroevil">
+            </df>
+            <in>set.c</in>
+          </df>
+        </df>
+        <df name="5-inline-hooking">
+          <df name="jmp">
+            <df name="zeroevil">
+            </df>
+            <in>jmp.c</in>
+          </df>
+        </df>
+        <df name="compat">
+        </df>
+        <df name="extra">
+          <df name="sys_open_is_not_exported">
+            <df name="zeroevil">
+            </df>
+            <in>symbols.c</in>
+          </df>
+        </df>
+        <df name="scripts">
+        </df>
+        <df name="tests">
+        </df>
+        <df name="zeroevil">
+          <in>structs.h</in>
+          <in>zeroevil.c</in>
+          <in>zeroevil.h</in>
+        </df>
+      </df>
+      <df name="rootkit-sample-code">
+        <df name="tutorial-one">
+          <df name=".tmp_versions">
+            <in>lkm1.mod</in>
+          </df>
+          <in>back</in>
+          <in>lkm1.c</in>
+          <in>lkm1.mod.c</in>
+        </df>
+        <df name="tutorial-three">
+          <df name=".tmp_versions">
+            <in>lkm4.mod</in>
+          </df>
+          <in>lkm4.c</in>
+          <in>lkm4.mod.c</in>
+        </df>
+        <df name="tutorial-two">
+          <df name="idt">
+            <df name=".tmp_versions">
+              <in>lkm3.mod</in>
+            </df>
+            <in>lkm3.c</in>
+            <in>lkm3.mod.c</in>
+          </df>
+          <df name="idt2">
+            <df name=".tmp_versions">
+              <in>lkm3.mod</in>
+            </df>
+            <df name="youyifeng">
+            </df>
+            <df name="yyf">
+            </df>
+            <in>lkm3.c</in>
+            <in>lkm3.mod.c</in>
+          </df>
+          <df name="idt3">
+            <df name=".tmp_versions">
+              <in>sys_mkdir.mod</in>
+            </df>
+            <in>sys_mkdir.c</in>
+            <in>sys_mkdir.mod.c</in>
+          </df>
+          <df name="system.map">
+            <df name=".tmp_versions">
+              <in>lkm2.mod</in>
+            </df>
+            <in>lkm2.c</in>
+            <in>lkm2.mod.c</in>
+            <in>sys_map_addr.h</in>
+          </df>
+        </df>
+      </df>
+      <df name="syscall">
+        <in>getpgid.c</in>
+        <in>getpid.c</in>
+        <in>gettid.c</in>
+      </df>
+      <in>Rtcmd.c</in>
+      <in>Rtcmd.h</in>
+      <in>Rtlist.c</in>
+      <in>Rtlist.h</in>
+      <in>Rtonline.c</in>
+      <in>Rtonline.h</in>
+      <in>Rtpath.c</in>
+      <in>Rtpath.h</in>
+      <in>Rtstring.c</in>
+      <in>Rtstring.h</in>
+      <in>Rtsyscall.c</in>
+      <in>Rtsyscall.h</in>
+      <in>Rtwrite.c</in>
+      <in>Rtwrite.h</in>
+      <in>rootkit.mod.c</in>
+      <in>syscalltable.c</in>
+      <in>syscalltable.h</in>
+    </df>
+  </logicalFolder>
+  <projectmakefile>/root/lkm//root/lkm/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>/root/lkm//root/lkm</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
