@@ -17,24 +17,26 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
-	{ 0xa9b402ff, __VMLINUX_SYMBOL_STR(module_layout) },
-	{ 0x4f08958d, __VMLINUX_SYMBOL_STR(kmalloc_caches) },
+	{ 0x9869a9ec, __VMLINUX_SYMBOL_STR(module_layout) },
+	{ 0x9d76befc, __VMLINUX_SYMBOL_STR(kmalloc_caches) },
 	{ 0xd0d8621b, __VMLINUX_SYMBOL_STR(strlen) },
 	{ 0x91715312, __VMLINUX_SYMBOL_STR(sprintf) },
 	{ 0xe2d5255a, __VMLINUX_SYMBOL_STR(strcmp) },
-	{ 0xc063f856, __VMLINUX_SYMBOL_STR(current_task) },
+	{ 0x574937b1, __VMLINUX_SYMBOL_STR(current_task) },
 	{ 0x50eedeb8, __VMLINUX_SYMBOL_STR(printk) },
 	{ 0x20c55ae0, __VMLINUX_SYMBOL_STR(sscanf) },
 	{ 0xb6ed1e53, __VMLINUX_SYMBOL_STR(strncpy) },
 	{ 0xb4390f9a, __VMLINUX_SYMBOL_STR(mcount) },
-	{ 0x61ea15a5, __VMLINUX_SYMBOL_STR(fput) },
+	{ 0xbcc308bb, __VMLINUX_SYMBOL_STR(strnlen_user) },
+	{ 0x1210a785, __VMLINUX_SYMBOL_STR(fput) },
 	{ 0x61651be, __VMLINUX_SYMBOL_STR(strcat) },
 	{ 0xdb7305a1, __VMLINUX_SYMBOL_STR(__stack_chk_fail) },
-	{ 0x40b11566, __VMLINUX_SYMBOL_STR(kmem_cache_alloc_trace) },
+	{ 0x18031c0d, __VMLINUX_SYMBOL_STR(kmem_cache_alloc_trace) },
 	{ 0x37a0cba, __VMLINUX_SYMBOL_STR(kfree) },
-	{ 0x4ddd40ec, __VMLINUX_SYMBOL_STR(fget) },
+	{ 0x3af5f422, __VMLINUX_SYMBOL_STR(fget) },
 	{ 0xb81960ca, __VMLINUX_SYMBOL_STR(snprintf) },
 	{ 0x8235805b, __VMLINUX_SYMBOL_STR(memmove) },
+	{ 0x4f6b400b, __VMLINUX_SYMBOL_STR(_copy_from_user) },
 	{ 0xe914e41e, __VMLINUX_SYMBOL_STR(strcpy) },
 	{ 0x268cc6a2, __VMLINUX_SYMBOL_STR(sys_close) },
 };
@@ -45,4 +47,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "7450CC66F5CE07DCFF4E395");
+MODULE_INFO(srcversion, "D5A45433FBDEFA2DA7480C3");

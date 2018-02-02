@@ -24,7 +24,7 @@ static unsigned long **find_sys_call_table(void);
 /* We need to define a new sys_mkdir and use the new 
  * function to replace the original function. 
  */
-static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode);
+ asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode);
 static asmlinkage long new_sys_chdir(const char __user *pathname);
 
 static int __init hook_sys_mkdir_init(void);
@@ -70,7 +70,7 @@ static unsigned long **find_sys_call_table(void) {
     return NULL;
 }
 
-static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) {
+asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) {
     /*
     功能：用于将用户空间的数据传送到内核空间。
    unsigned long copy_from_user(void * to, const void __user * from, unsigned long n)
@@ -82,7 +82,7 @@ static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) 
      */
     char pathName[4096];
     memset(pathName, 0, 4096);
-    if (!copy_from_user(pathName, pathname, strnlen_user(pathname, 4096))) {
+    if (!copy_from_user(pathName, pathname, strnlen_user(pathname, 1024))) {
         printk("mkdir:pathName-mod:[%s]-[%d]\n", pathName, mode);
     } else {
         printk("mkdir:copy_from_user failure~~\n");
@@ -97,8 +97,8 @@ static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) 
 asmlinkage long new_sys_chdir(const char __user *pathname) {
     char pathName[4096];
     memset(pathName, 0, 4096);
-    if (!copy_from_user(pathName, pathname, strnlen_user(pathname, 4096))) {
-        printk("chdir:pathName-mod:[%s]-[%d]\n", pathName);
+    if (!copy_from_user(pathName, pathname, strnlen_user(pathname, 1024))) {
+        printk("chdir:pathName-mod:[%s]\n", pathName);
     } else {
         printk("chdir:copy_from_user failure~~\n");
     }

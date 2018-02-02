@@ -1,4 +1,4 @@
-cmd_/root/lkm/Rtsyscall.o := gcc -Wp,-MD,/root/lkm/.Rtsyscall.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.8/include -I./arch/x86/include -Iarch/x86/include/generated/uapi -Iarch/x86/include/generated  -Iinclude -I./arch/x86/include/uapi -Iarch/x86/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -D__KERNEL__ -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -m32 -msoft-float -mregparm=3 -freg-struct-return -fno-pic -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -DCONFIG_AS_SSSE3=1 -DCONFIG_AS_CRC32=1 -DCONFIG_AS_AVX=1 -DCONFIG_AS_AVX2=1 -DCONFIG_AS_SHA1_NI=1 -DCONFIG_AS_SHA256_NI=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1024 -fstack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -g -gdwarf-4 -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -DCC_HAVE_ASM_GOTO -Wno-sizeof-pointer-memaccess -I ./  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(Rtsyscall)"  -D"KBUILD_MODNAME=KBUILD_STR(rootkit)" -c -o /root/lkm/.tmp_Rtsyscall.o /root/lkm/Rtsyscall.c
+cmd_/root/lkm/Rtsyscall.o := gcc -Wp,-MD,/root/lkm/.Rtsyscall.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.8/include  -I./arch/x86/include -Iarch/x86/include/generated/uapi -Iarch/x86/include/generated  -Iinclude -I./arch/x86/include/uapi -Iarch/x86/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -Iubuntu/include  -D__KERNEL__ -fno-pie -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-PIE -fno-pie -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -m32 -msoft-float -mregparm=3 -freg-struct-return -fno-pic -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -DCONFIG_AS_SSSE3=1 -DCONFIG_AS_CRC32=1 -DCONFIG_AS_AVX=1 -DCONFIG_AS_AVX2=1 -DCONFIG_AS_SHA1_NI=1 -DCONFIG_AS_SHA256_NI=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -Wno-maybe-uninitialized -O2 --param=allow-store-data-races=0 -DCC_HAVE_ASM_GOTO -Wframe-larger-than=1024 -fstack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Wno-sizeof-pointer-memaccess -I ./  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(Rtsyscall)"  -D"KBUILD_MODNAME=KBUILD_STR(rootkit)" -c -o /root/lkm/.tmp_Rtsyscall.o /root/lkm/Rtsyscall.c
 
 source_/root/lkm/Rtsyscall.o := /root/lkm/Rtsyscall.c
 
@@ -8,9 +8,9 @@ deps_/root/lkm/Rtsyscall.o := \
   include/linux/module.h \
     $(wildcard include/config/modules.h) \
     $(wildcard include/config/sysfs.h) \
-    $(wildcard include/config/unused/symbols.h) \
     $(wildcard include/config/module/sig.h) \
     $(wildcard include/config/modules/tree/lookup.h) \
+    $(wildcard include/config/unused/symbols.h) \
     $(wildcard include/config/generic/bug.h) \
     $(wildcard include/config/kallsyms.h) \
     $(wildcard include/config/smp.h) \
@@ -124,28 +124,27 @@ deps_/root/lkm/Rtsyscall.o := \
   include/asm-generic/qspinlock_types.h \
   include/asm-generic/qrwlock_types.h \
   include/asm-generic/ptrace.h \
-  arch/x86/include/asm/cpufeature.h \
-    $(wildcard include/config/x86/feature/names.h) \
-    $(wildcard include/config/x86/debug/static/cpu/has.h) \
-  arch/x86/include/asm/required-features.h \
-    $(wildcard include/config/x86/minimum/cpu/family.h) \
-    $(wildcard include/config/math/emulation.h) \
-    $(wildcard include/config/x86/cmpxchg64.h) \
-    $(wildcard include/config/x86/use/3dnow.h) \
-    $(wildcard include/config/x86/p6/nop.h) \
-    $(wildcard include/config/matom.h) \
-  arch/x86/include/asm/disabled-features.h \
-    $(wildcard include/config/x86/intel/mpx.h) \
   arch/x86/include/asm/rmwcc.h \
   arch/x86/include/asm/barrier.h \
     $(wildcard include/config/x86/ppro/fence.h) \
   arch/x86/include/asm/nops.h \
     $(wildcard include/config/mk7.h) \
+    $(wildcard include/config/x86/p6/nop.h) \
+  include/asm-generic/barrier.h \
   include/asm-generic/bitops/fls64.h \
   include/asm-generic/bitops/find.h \
     $(wildcard include/config/generic/find/first/bit.h) \
   include/asm-generic/bitops/sched.h \
   arch/x86/include/asm/arch_hweight.h \
+  arch/x86/include/asm/cpufeatures.h \
+  arch/x86/include/asm/required-features.h \
+    $(wildcard include/config/x86/minimum/cpu/family.h) \
+    $(wildcard include/config/math/emulation.h) \
+    $(wildcard include/config/x86/cmpxchg64.h) \
+    $(wildcard include/config/x86/use/3dnow.h) \
+    $(wildcard include/config/matom.h) \
+  arch/x86/include/asm/disabled-features.h \
+    $(wildcard include/config/x86/intel/mpx.h) \
   include/asm-generic/bitops/const_hweight.h \
   include/asm-generic/bitops/le.h \
   arch/x86/include/uapi/asm/byteorder.h \
@@ -231,6 +230,9 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/sparsemem/vmemmap.h) \
     $(wildcard include/config/sparsemem.h) \
   include/asm-generic/getorder.h \
+  arch/x86/include/asm/cpufeature.h \
+    $(wildcard include/config/x86/feature/names.h) \
+    $(wildcard include/config/x86/debug/static/cpu/has.h) \
   arch/x86/include/asm/processor.h \
     $(wildcard include/config/m486.h) \
     $(wildcard include/config/xen.h) \
@@ -334,6 +336,7 @@ deps_/root/lkm/Rtsyscall.o := \
   include/linux/gfp.h \
     $(wildcard include/config/zone/dma.h) \
     $(wildcard include/config/zone/dma32.h) \
+    $(wildcard include/config/zone/device.h) \
     $(wildcard include/config/numa.h) \
     $(wildcard include/config/deferred/struct/page/init.h) \
     $(wildcard include/config/pm/sleep.h) \
@@ -344,7 +347,6 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/force/max/zoneorder.h) \
     $(wildcard include/config/memory/isolation.h) \
     $(wildcard include/config/memcg.h) \
-    $(wildcard include/config/zone/device.h) \
     $(wildcard include/config/memory/hotplug.h) \
     $(wildcard include/config/compaction.h) \
     $(wildcard include/config/flat/node/mem/map.h) \
@@ -549,6 +551,7 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/userfaultfd.h) \
     $(wildcard include/config/aio.h) \
     $(wildcard include/config/mmu/notifier.h) \
+    $(wildcard include/config/arch/want/batched/unmap/tlb/flush.h) \
   include/linux/auxvec.h \
   include/uapi/linux/auxvec.h \
   include/linux/uprobes.h \
@@ -700,7 +703,6 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/memory/balloon.h) \
     $(wildcard include/config/balloon/compaction.h) \
   include/linux/seq_file.h \
-  include/linux/poll.h \
   include/linux/fs.h \
     $(wildcard include/config/fs/posix/acl.h) \
     $(wildcard include/config/security.h) \
@@ -710,6 +712,7 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/epoll.h) \
     $(wildcard include/config/file/locking.h) \
     $(wildcard include/config/quota.h) \
+    $(wildcard include/config/blk/dev/loop.h) \
     $(wildcard include/config/fs/dax.h) \
     $(wildcard include/config/block.h) \
   include/linux/kdev_t.h \
@@ -740,6 +743,11 @@ deps_/root/lkm/Rtsyscall.o := \
   include/uapi/linux/fcntl.h \
   arch/x86/include/uapi/asm/fcntl.h \
   include/uapi/asm-generic/fcntl.h \
+  include/linux/cred.h \
+    $(wildcard include/config/debug/credentials.h) \
+  include/linux/selinux.h \
+    $(wildcard include/config/security/selinux.h) \
+  include/linux/poll.h \
   arch/x86/include/asm/uaccess.h \
     $(wildcard include/config/x86/intel/usercopy.h) \
     $(wildcard include/config/debug/strict/user/copy/checks.h) \
@@ -826,13 +834,12 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/cgroup/sched.h) \
     $(wildcard include/config/blk/dev/io/trace.h) \
     $(wildcard include/config/compat/brk.h) \
+    $(wildcard include/config/cgroups.h) \
     $(wildcard include/config/auditsyscall.h) \
     $(wildcard include/config/rt/mutexes.h) \
     $(wildcard include/config/task/xacct.h) \
     $(wildcard include/config/cpusets.h) \
-    $(wildcard include/config/cgroups.h) \
     $(wildcard include/config/futex.h) \
-    $(wildcard include/config/arch/want/batched/unmap/tlb/flush.h) \
     $(wildcard include/config/fault/injection.h) \
     $(wildcard include/config/latencytop.h) \
     $(wildcard include/config/function/graph/tracer.h) \
@@ -866,15 +873,12 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/debug/rt/mutexes.h) \
   include/linux/hrtimer.h \
     $(wildcard include/config/high/res/timers.h) \
+    $(wildcard include/config/time/low/res.h) \
     $(wildcard include/config/timerfd.h) \
   include/linux/timerqueue.h \
   include/linux/task_io_accounting.h \
     $(wildcard include/config/task/io/accounting.h) \
   include/linux/latencytop.h \
-  include/linux/cred.h \
-    $(wildcard include/config/debug/credentials.h) \
-  include/linux/selinux.h \
-    $(wildcard include/config/security/selinux.h) \
   include/uapi/linux/magic.h \
   include/linux/cgroup-defs.h \
   include/linux/percpu-refcount.h \
@@ -940,6 +944,8 @@ deps_/root/lkm/Rtsyscall.o := \
   include/linux/cgroup.h \
   include/uapi/linux/cgroupstats.h \
   include/uapi/linux/taskstats.h \
+  include/linux/user_namespace.h \
+    $(wildcard include/config/persistent/keyrings.h) \
   arch/x86/include/asm/local.h \
   include/linux/file.h \
   include/linux/dirent.h \
@@ -1032,6 +1038,7 @@ deps_/root/lkm/Rtsyscall.o := \
   include/linux/list_nulls.h \
   include/linux/netdevice.h \
     $(wildcard include/config/dcb.h) \
+    $(wildcard include/config/hyperv/net.h) \
     $(wildcard include/config/wlan.h) \
     $(wildcard include/config/ax25.h) \
     $(wildcard include/config/mac80211/mesh.h) \
@@ -1134,6 +1141,7 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/add/property.h) \
     $(wildcard include/config/remove/property.h) \
     $(wildcard include/config/update/property.h) \
+    $(wildcard include/config/of/numa.h) \
     $(wildcard include/config/no/change.h) \
     $(wildcard include/config/change/add.h) \
     $(wildcard include/config/change/remove.h) \
@@ -1169,6 +1177,9 @@ deps_/root/lkm/Rtsyscall.o := \
   include/uapi/linux/if_link.h \
     $(wildcard include/config/pending.h) \
   include/uapi/linux/if_bonding.h \
+  include/uapi/linux/pkt_cls.h \
+    $(wildcard include/config/net/cls/ind.h) \
+  include/uapi/linux/pkt_sched.h \
   include/linux/page_counter.h \
   include/linux/memcontrol.h \
     $(wildcard include/config/memcg/swap.h) \
@@ -1192,9 +1203,7 @@ deps_/root/lkm/Rtsyscall.o := \
   include/linux/filter.h \
     $(wildcard include/config/bpf/jit.h) \
   include/net/sch_generic.h \
-  include/uapi/linux/pkt_sched.h \
   include/uapi/linux/pkt_cls.h \
-    $(wildcard include/config/net/cls/ind.h) \
   include/net/gen_stats.h \
   include/uapi/linux/gen_stats.h \
   include/linux/rtnetlink.h \
@@ -1246,7 +1255,6 @@ deps_/root/lkm/Rtsyscall.o := \
     $(wildcard include/config/firewire/net.h) \
   include/uapi/linux/if_arp.h \
   include/linux/hash.h \
-    $(wildcard include/config/arch/has/fast/multiplier.h) \
   include/net/ip_fib.h \
     $(wildcard include/config/ip/route/multipath.h) \
   include/net/fib_rules.h \

