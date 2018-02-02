@@ -2,12 +2,8 @@
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="/root/lkm" name="0">
-      <df name="research-rootkit-master">
-        <df name="1-sys_call_table">
-          <df name="psmon">
-            <in>psmon.c</in>
-          </df>
-        </df>
+      <df name="hook-syscallNoArch">
+        <in>hook_sys.h</in>
       </df>
       <in>Rtcmd.c</in>
       <in>Rtcmd.h</in>
@@ -111,13 +107,8 @@
           </incDir>
         </ccTool>
       </folder>
-      <folder path="0/research-rootkit-master">
-        <cTool>
-          <incDir>
-            <pElem>/root/lkm//root/lkm/research-rootkit-master</pElem>
-          </incDir>
-        </cTool>
-      </folder>
+      <item path="hook-syscallNoArch/hook_sys.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

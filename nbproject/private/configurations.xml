@@ -7,6 +7,14 @@
       </df>
       <df name="back">
       </df>
+      <df name="hook-syscallNoArch">
+        <df name=".tmp_versions">
+          <in>hook_sys_mkdir.mod</in>
+        </df>
+        <in>hook_sys.h</in>
+        <in>hook_sys_mkdir.c</in>
+        <in>hook_sys_mkdir.mod.c</in>
+      </df>
       <df name="reference">
         <df name="adore-ng">
           <df name="adore-ng">
@@ -74,10 +82,22 @@
         </df>
         <df name="hook-syscall-of-linux64">
           <df name=".tmp_versions">
+            <in>hook_sys_mkdir.mod</in>
+          </df>
+          <df name="4.4.0-104-generic">
+            <df name="mkdir-2018-02-01+21:00:27">
+            </df>
+            <df name="mkdir-2018-02-01+21:01:16">
+            </df>
+            <df name="mkdir-2018-02-01+21:02:19">
+            </df>
+            <df name="mkdir-2018-02-01+21:02:23">
+            </df>
           </df>
           <df name="youyifeng">
           </df>
           <in>hook_sys_mkdir.c</in>
+          <in>hook_sys_mkdir.mod.c</in>
         </df>
         <df name="inl_hook">
           <df name=".tmp_versions">
@@ -161,6 +181,9 @@
                 <in>fshidko.mod</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>fshid.c</in>
               <in>fshidko.mod.c</in>
@@ -170,12 +193,18 @@
                 <in>fsmonko.mod</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>fsmon.c</in>
               <in>fsmonko.mod.c</in>
             </df>
             <df name="hello">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>hello.c</in>
             </df>
@@ -184,6 +213,9 @@
                 <in>psmonko.mod</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>psmon.c</in>
               <in>psmonko.mod.c</in>
@@ -193,6 +225,9 @@
                 <in>sys_call_tableko.mod</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>sys_call_table.c</in>
               <in>sys_call_tableko.mod.c</in>
@@ -202,6 +237,9 @@
                 <in>write_protectionko.mod</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>write_protection.c</in>
               <in>write_protectionko.mod.c</in>
@@ -212,36 +250,57 @@
               <df name="test">
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>fshid.c</in>
             </df>
             <df name="kohid">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>kohid.c</in>
             </df>
             <df name="komon">
               <df name="test">
                 <df name="zeroevil">
+                  <in>structs.h</in>
+                  <in>zeroevil.c</in>
+                  <in>zeroevil.h</in>
                 </df>
                 <in>test.c</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>komon.c</in>
             </df>
             <df name="pshid">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>pshid.c</in>
             </df>
             <df name="pthid">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>pthid.c</in>
             </df>
             <df name="root">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>root.c</in>
             </df>
@@ -252,10 +311,16 @@
                 <df name="test">
                 </df>
                 <df name="zeroevil">
+                  <in>structs.h</in>
+                  <in>zeroevil.c</in>
+                  <in>zeroevil.h</in>
                 </df>
                 <in>fshid.c</in>
               </df>
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>codeinj.c</in>
             </df>
@@ -268,6 +333,9 @@
             </df>
             <df name="noinj">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>noinj.c</in>
             </df>
@@ -276,6 +344,9 @@
                 <df name="test">
                 </df>
                 <df name="zeroevil">
+                  <in>structs.h</in>
+                  <in>zeroevil.c</in>
+                  <in>zeroevil.h</in>
                 </df>
                 <in>fshid.c</in>
               </df>
@@ -284,21 +355,33 @@
           <df name="4-entry_SYSCALL_64">
             <df name="get">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>get.c</in>
             </df>
             <df name="ifmon">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>ifmon.c</in>
             </df>
             <df name="rec">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>rec.c</in>
             </df>
             <df name="set">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>set.c</in>
             </df>
@@ -306,6 +389,9 @@
           <df name="5-inline-hooking">
             <df name="jmp">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>jmp.c</in>
             </df>
@@ -315,6 +401,9 @@
           <df name="extra">
             <df name="sys_open_is_not_exported">
               <df name="zeroevil">
+                <in>structs.h</in>
+                <in>zeroevil.c</in>
+                <in>zeroevil.h</in>
               </df>
               <in>symbols.c</in>
             </df>
@@ -688,6 +777,7 @@
                   <in>intl-compat.c</in>
                   <in>l10nflist.c</in>
                   <in>libgettext.h</in>
+                  <in>libintl.h</in>
                   <in>loadinfo.h</in>
                   <in>loadmsgcat.c</in>
                   <in>localealias.c</in>
@@ -922,15 +1012,19 @@
                   </df>
                   <df name="net">
                     <in>bpf.h</in>
+                    <in>bpf.h</in>
+                    <in>bpf_filter.c</in>
                   </df>
                   <df name="SUNOS4">
                   </df>
+                  <in>bpf_filter.c</in>
                   <in>bpf_filter.c</in>
                   <in>bpf_image.c</in>
                   <in>etherent.c</in>
                   <in>ethertype.h</in>
                   <in>gencode.c</in>
                   <in>gencode.h</in>
+                  <in>gnuc.h</in>
                   <in>gnuc.h</in>
                   <in>inet.c</in>
                   <in>nametoaddr.c</in>
@@ -1696,13 +1790,6 @@
           <in>sysgen.h</in>
         </df>
         <df name="wnps">
-        </df>
-      </df>
-      <df name="research-rootkit-master">
-        <df name="1-sys_call_table">
-          <df name="psmon">
-            <in>psmon.c</in>
-          </df>
         </df>
       </df>
       <df name="syscall">

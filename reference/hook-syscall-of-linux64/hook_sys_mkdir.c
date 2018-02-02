@@ -88,6 +88,7 @@ static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) 
         printk("mkdir:copy_from_user failure~~\n");
     }
 
+
     /* We still need to pass the parameters to the original sys_mkdir 
      * to complete the procedure of the system call. 
      */
