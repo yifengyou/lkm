@@ -14,4 +14,4 @@ default:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 clean:
-	rm -f *.o *.ko *.mod.c 
+	rm -f *.o *.ko *.mod.c  modules.order Module.symvers

@@ -1,0 +1,1 @@
+cmd_/root/lkm/rt-01/rootkit.o := ld -m elf_i386   -r -o /root/lkm/rt-01/rootkit.o /root/lkm/rt-01/Rtonline.o /root/lkm/rt-01/Rtsyscall.o /root/lkm/rt-01/Rtwrite.o /root/lkm/rt-01/Rtcmd.o /root/lkm/rt-01/Rtstring.o /root/lkm/rt-01/Rtlist.o /root/lkm/rt-01/Rtpath.o 

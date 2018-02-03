@@ -8,12 +8,8 @@
       <df name="back">
       </df>
       <df name="hook-syscallNoArch">
-        <df name=".tmp_versions">
-          <in>hook_sys_mkdir.mod</in>
-        </df>
+        <in>hook_sys.c</in>
         <in>hook_sys.h</in>
-        <in>hook_sys_mkdir.c</in>
-        <in>hook_sys_mkdir.mod.c</in>
       </df>
       <df name="reference">
         <df name="adore-ng">
@@ -997,9 +993,12 @@
                 <df name="libpcap-0.4">
                   <df name="bpf">
                     <df name="net">
+                      <in>bpf.h</in>
+                      <in>bpf_filter.c</in>
                     </df>
                   </df>
                   <df name="lbl">
+                    <in>gnuc.h</in>
                     <in>os-solaris2.h</in>
                     <in>os-sunos4.h</in>
                     <in>os-ultrix4.h</in>
@@ -1012,19 +1011,16 @@
                   </df>
                   <df name="net">
                     <in>bpf.h</in>
-                    <in>bpf.h</in>
                     <in>bpf_filter.c</in>
                   </df>
                   <df name="SUNOS4">
                   </df>
-                  <in>bpf_filter.c</in>
                   <in>bpf_filter.c</in>
                   <in>bpf_image.c</in>
                   <in>etherent.c</in>
                   <in>ethertype.h</in>
                   <in>gencode.c</in>
                   <in>gencode.h</in>
-                  <in>gnuc.h</in>
                   <in>gnuc.h</in>
                   <in>inet.c</in>
                   <in>nametoaddr.c</in>
@@ -1791,6 +1787,26 @@
         </df>
         <df name="wnps">
         </df>
+      </df>
+      <df name="rt-01">
+        <df name=".tmp_versions">
+          <in>rootkit.mod</in>
+        </df>
+        <in>Rtcmd.c</in>
+        <in>Rtcmd.h</in>
+        <in>Rtlist.c</in>
+        <in>Rtlist.h</in>
+        <in>Rtonline.c</in>
+        <in>Rtonline.h</in>
+        <in>Rtpath.c</in>
+        <in>Rtpath.h</in>
+        <in>Rtstring.c</in>
+        <in>Rtstring.h</in>
+        <in>Rtsyscall.c</in>
+        <in>Rtsyscall.h</in>
+        <in>Rtwrite.c</in>
+        <in>Rtwrite.h</in>
+        <in>rootkit.mod.c</in>
       </df>
       <df name="syscall">
         <in>getpgid.c</in>

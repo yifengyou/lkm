@@ -85,6 +85,11 @@
       </item>
       <item path="/root/lkm/Rtwrite.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="/root/lkm/hook-syscallNoArch/hook_sys.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="/root/lkm/rootkit.mod.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="/root/lkm/syscalltable.c" ex="false" tool="0" flavor2="0">
@@ -107,8 +112,6 @@
           </incDir>
         </ccTool>
       </folder>
-      <item path="hook-syscallNoArch/hook_sys.h" ex="false" tool="3" flavor2="0">
-      </item>
     </conf>
   </confs>
 </configurationDescriptor>
