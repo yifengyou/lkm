@@ -5,13 +5,17 @@ static void disable_write_protection(void);
 static void enable_write_protection(void);
 static unsigned long **sys_call_table;
 
-// sys_read - 3
+/**
+ *  sys_read - 3
+ * 
+ */
+#define DEBUG_READ
 RT_SYSCALL_DEFINE(long, read, unsigned int fd,
         char __user *buf, size_t count) {
     int ret;
 
-#ifdef DEBUG  
-    printk("read:fs:[%d],count:[%d]\n",fd,count);
+#ifdef DEBUG_READ
+    DLog("read:fd:[%d],count:[%d]",fd,count);
 #endif
     
     ret = RT_SYSCALL_CALL(read, fd, buf, count);
@@ -22,17 +26,18 @@ RT_SYSCALL_DEFINE(long, read, unsigned int fd,
  * sys_open - 5
  * 只检查打开的文件是否是 /proc/net/tcp 或 /proc/net/udp，否则调用正常中断
  */
+#define DEBUG_OPEN
 RT_SYSCALL_DEFINE(long, open, const char __user *filename,
         int flags, int mode) {
     int ret;
 
-#ifdef DEBUG    
+#ifdef DEBUG_OPEN
     char kfileName[MAX_PATH];
     memset(kfileName, 0, MAX_PATH);
     if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
-        printk("open:filename:[%s]flags:[%d]mode:[%d]\n", kfileName, flags, mode);
+        DLog("open:filename:[%s]flags:[%d]mode:[%d]", kfileName, flags, mode);
     } else {
-        printk("open:copy_from_user failure~~\n");
+        DLog("open:copy_from_user failure~~");
     }
 #endif       
 
@@ -40,37 +45,57 @@ RT_SYSCALL_DEFINE(long, open, const char __user *filename,
     return ret;
 }
 
-// sys_chdir - 12
+/**
+ *  sys_chdir - 12
+ */
+#define DEBUG_CHDIR
 RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
     int ret;
 
-#ifdef DEBUG    
+#ifdef DEBUG_CHDIR
     char kfileName[MAX_PATH];
     memset(kfileName, 0, MAX_PATH);
     if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
-        printk("chdir:filename:[%s]\n", kfileName);
+        DLog("chdir:filename:[%s]", kfileName);
     } else {
-        printk("chdir:copy_from_user failure~~\n");
+        DLog("chdir:copy_from_user failure~~");
     }
 #endif   
 
     ret = RT_SYSCALL_CALL(chdir, filename);
     return ret;
 }
-// sys_kill - 37
+
+/**
+ *  sys_kill - 37
+ */
+#define DEBUG_KILL
 RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
     long ret = 0;
 
-#ifdef DEBUG  
-    printk("kill:pid:[%d],sig:[%d]\n",pid,sig);
+#ifdef DEBUG_KILL
+    DLog("kill:pid:[%d],sig:[%d]",pid,sig);
 #endif
     
     ret = RT_SYSCALL_CALL(kill, pid, sig);
     return ret;
 }
 
+/**
+ * sys_getsid - 66
+ */
+#define DEBUG_GETSID
+RT_SYSCALL_DEFINE(long, getsid, pid_t pid) {
+    int ret;
+#ifdef DEBUG_GETSID
+    DLog("getsid:pid:[%d]",pid);
+#endif    
+    ret = RT_SYSCALL_CALL(getsid, pid);
+    return ret;
+}
 
-
+/**
+ */
 RT_SYSCALL_DEFINE(long, init_module, void __user *umod, unsigned long len,
         const char __user *uargs) {
     int ret;
@@ -108,11 +133,6 @@ RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, getsid, pid_t pid) {
-    int ret;
-    ret = RT_SYSCALL_CALL(getsid, pid);
-    return ret;
-}
 
 RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
     int ret;
@@ -251,6 +271,7 @@ ThisInit(void) {
     RT_SYSCALL_REPLACE(open); //5    
     RT_SYSCALL_REPLACE(chdir); //12
     RT_SYSCALL_REPLACE(kill); //37
+    RT_SYSCALL_REPLACE(getsid); //66
 
     enable_write_protection();
 
@@ -266,6 +287,7 @@ ThisExit(void) {
     RT_SYSCALL_RESTORE(open); //5   
     RT_SYSCALL_RESTORE(chdir); //12
     RT_SYSCALL_RESTORE(kill); //37
+    RT_SYSCALL_RESTORE(getsid); //66
 
     enable_write_protection();
 

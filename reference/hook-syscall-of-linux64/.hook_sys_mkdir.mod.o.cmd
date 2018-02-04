@@ -111,6 +111,7 @@ deps_/root/lkm/reference/hook-syscall-of-linux64/hook_sys_mkdir.mod.o := \
   arch/x86/include/asm/pgtable_types.h \
     $(wildcard include/config/kmemcheck.h) \
     $(wildcard include/config/mem/soft/dirty.h) \
+    $(wildcard include/config/kaiser.h) \
     $(wildcard include/config/proc/fs.h) \
   arch/x86/include/asm/pgtable_32_types.h \
     $(wildcard include/config/highmem.h) \
@@ -437,6 +438,7 @@ deps_/root/lkm/reference/hook-syscall-of-linux64/hook_sys_mkdir.mod.o := \
     $(wildcard include/config/use/percpu/numa/node/id.h) \
     $(wildcard include/config/sched/smt.h) \
   include/linux/smp.h \
+    $(wildcard include/config/x86.h) \
     $(wildcard include/config/up/late/init.h) \
   include/linux/llist.h \
     $(wildcard include/config/arch/have/nmi/safe/cmpxchg.h) \
@@ -466,7 +468,6 @@ deps_/root/lkm/reference/hook-syscall-of-linux64/hook_sys_mkdir.mod.o := \
   arch/x86/include/asm/ist.h \
   arch/x86/include/uapi/asm/ist.h \
   include/video/edid.h \
-    $(wildcard include/config/x86.h) \
   include/uapi/video/edid.h \
   arch/x86/include/asm/apicdef.h \
   arch/x86/include/asm/apic.h \

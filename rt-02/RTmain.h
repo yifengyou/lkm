@@ -40,7 +40,6 @@ if(args1) call(args1);\
 
 // define a struct to save system call
 #define RT_SYSCALL_DEFINE(ret, name, args...) \
-asmlinkage ret rt_sys_##name(args); \
 union {\
     unsigned long val;\
     asmlinkage ret (*fuc)(args);\
@@ -52,7 +51,7 @@ asmlinkage ret rt_sys_##name(args)
 
 // replace the original system call
 #define RT_SYSCALL_REPLACE(name) {\
-orig_sys_##name.val = (unsigned long)sys_call_table[__NR_##name];\
+orig_sys_##name.val = sys_call_table[__NR_##name];\
 sys_call_table[__NR_##name] = (unsigned long)(rt_sys_##name);\
 }
 
