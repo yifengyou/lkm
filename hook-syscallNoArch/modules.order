@@ -1,0 +1,1 @@
+kernel//root/lkm/hook-syscallNoArch/hook_sys.ko

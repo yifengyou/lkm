@@ -2,6 +2,64 @@
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <df name=".metadata">
+        <df name=".plugins">
+          <df name="org.eclipse.cdt.codan.ui">
+          </df>
+          <df name="org.eclipse.cdt.core">
+          </df>
+          <df name="org.eclipse.cdt.make.core">
+            <in>specs.c</in>
+            <in>specs.cpp</in>
+          </df>
+          <df name="org.eclipse.cdt.managedbuilder.core">
+            <in>spec.C</in>
+            <in>spec.c</in>
+          </df>
+          <df name="org.eclipse.cdt.managedbuilder.ui">
+          </df>
+          <df name="org.eclipse.cdt.ui">
+          </df>
+          <df name="org.eclipse.core.resources">
+            <df name=".history">
+            </df>
+            <df name=".projects">
+              <df name="rootkit">
+                <df name=".indexes">
+                  <df name="6d">
+                  </df>
+                </df>
+              </df>
+            </df>
+            <df name=".root">
+              <df name=".indexes">
+              </df>
+            </df>
+            <df name=".safetable">
+            </df>
+          </df>
+          <df name="org.eclipse.core.runtime">
+            <df name=".settings">
+            </df>
+          </df>
+          <df name="org.eclipse.debug.core">
+          </df>
+          <df name="org.eclipse.debug.ui">
+          </df>
+          <df name="org.eclipse.jdt.core">
+          </df>
+          <df name="org.eclipse.jdt.ui">
+          </df>
+          <df name="org.eclipse.ltk.core.refactoring">
+          </df>
+          <df name="org.eclipse.ui.ide">
+          </df>
+          <df name="org.eclipse.ui.intro">
+          </df>
+          <df name="org.eclipse.ui.workbench">
+          </df>
+        </df>
+      </df>
       <df name="back">
       </df>
       <df name="hook-syscallNoArch">
@@ -1785,6 +1843,18 @@
         <df name="wnps">
         </df>
       </df>
+      <df name="rootkit">
+        <df name="Debug">
+          <df name="rt-02">
+          </df>
+        </df>
+        <df name="rt-02">
+          <in>RTmain.c</in>
+          <in>RTmain.h</in>
+          <in>RTsyscalltable.c</in>
+          <in>RTsyscalltable.h</in>
+        </df>
+      </df>
       <df name="rt-01">
         <df name=".tmp_versions">
           <in>rootkit.mod</in>
@@ -1804,6 +1874,42 @@
         <in>Rtwrite.c</in>
         <in>Rtwrite.h</in>
         <in>rootkit.mod.c</in>
+      </df>
+      <df name="rt-02">
+        <df name="4.4.0-111-generic">
+          <df name="mkdir-2018-02-04+10:55:44">
+          </df>
+          <df name="mkdir-2018-02-04+10:58:58">
+          </df>
+          <df name="mkdir-2018-02-04+11:00:16">
+          </df>
+          <df name="mkdir-2018-02-04+11:00:46">
+          </df>
+          <df name="mkdir-2018-02-04+11:01:23">
+          </df>
+          <df name="mkdir-2018-02-04+11:02:26">
+          </df>
+          <df name="mkdir-2018-02-04+11:02:46">
+          </df>
+          <df name="mkdir-2018-02-04+11:02:54">
+          </df>
+          <df name="mkdir-2018-02-04+11:09:20">
+          </df>
+          <df name="mkdir-2018-02-04+11:10:00">
+          </df>
+          <df name="mkdir-2018-02-04+11:11:05">
+          </df>
+          <df name="mkdir-2018-02-04+11:15:15">
+          </df>
+          <df name="mkdir-2018-02-04+11:17:38">
+          </df>
+          <df name="mkdir-2018-02-04+12:48:06">
+          </df>
+        </df>
+        <in>RTmain.c</in>
+        <in>RTmain.h</in>
+        <in>RTsyscalltable.c</in>
+        <in>RTsyscalltable.h</in>
       </df>
       <df name="syscall">
         <in>getpgid.c</in>

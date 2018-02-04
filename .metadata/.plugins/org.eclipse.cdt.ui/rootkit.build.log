@@ -1,0 +1,14 @@
+13:36:47 **** Build of configuration Debug for project rootkit ****
+make all 
+Building file: ../rt-02/RTmain.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"rt-02/RTmain.d" -MT"rt-02/RTmain.d" -o "rt-02/RTmain.o" "../rt-02/RTmain.c"
+In file included from ../rt-02/RTmain.c:1:0:
+../rt-02/RTmain.h:4:24: fatal error: linux/file.h: 没有那个文件或目录
+ #include <linux/file.h>
+                        ^
+compilation terminated.
+make: *** [rt-02/RTmain.o] 错误 1
+
+13:36:47 Build Finished (took 112ms)
+
