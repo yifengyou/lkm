@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="/root/lkm" name="0">
-      <df name=".tmp_versions">
-        <in>rootkit.mod</in>
-      </df>
+    <df root="." name="0">
       <df name="back">
       </df>
       <df name="hook-syscallNoArch">
@@ -1813,26 +1810,9 @@
         <in>getpid.c</in>
         <in>gettid.c</in>
       </df>
-      <in>Rtcmd.c</in>
-      <in>Rtcmd.h</in>
-      <in>Rtlist.c</in>
-      <in>Rtlist.h</in>
-      <in>Rtonline.c</in>
-      <in>Rtonline.h</in>
-      <in>Rtpath.c</in>
-      <in>Rtpath.h</in>
-      <in>Rtstring.c</in>
-      <in>Rtstring.h</in>
-      <in>Rtsyscall.c</in>
-      <in>Rtsyscall.h</in>
-      <in>Rtwrite.c</in>
-      <in>Rtwrite.h</in>
-      <in>rootkit.mod.c</in>
-      <in>syscalltable.c</in>
-      <in>syscalltable.h</in>
     </df>
   </logicalFolder>
-  <projectmakefile>/root/lkm//root/lkm/Makefile</projectmakefile>
+  <projectmakefile></projectmakefile>
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
@@ -1871,7 +1851,7 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir>/root/lkm//root/lkm</rundir>
+        <rundir>.</rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
