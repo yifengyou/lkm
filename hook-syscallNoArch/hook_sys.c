@@ -111,13 +111,13 @@ static int __init hook_sys_mkdir_init(void) {
         printk("<0>""The hook_sys_mkdir cannot find the sys_call_table.\n");
         return -1;
     }
-    original_sys_mkdir = sys_call_table[__NR_mkdir];
-    original_sys_chdir = sys_call_table[__NR_chdir];
+    original_sys_mkdir = (void *)sys_call_table[__NR_mkdir];
+    original_sys_chdir = (void *)sys_call_table[__NR_chdir];
 
     disable_write_protection();
 
-    sys_call_table[__NR_mkdir] = new_sys_mkdir;
-    sys_call_table[__NR_chdir] = new_sys_chdir;
+    sys_call_table[__NR_mkdir] = (void *)new_sys_mkdir;
+    sys_call_table[__NR_chdir] = (void *)new_sys_chdir;
 
     enable_write_protection();
     return 0;
@@ -126,8 +126,8 @@ static int __init hook_sys_mkdir_init(void) {
 static void __exit hook_sys_mkdir_exit(void) {
     disable_write_protection();
 
-    sys_call_table[__NR_mkdir] = original_sys_mkdir;
-    sys_call_table[__NR_chdir] = original_sys_chdir;
+    sys_call_table[__NR_mkdir] = (void *)original_sys_mkdir;
+    sys_call_table[__NR_chdir] = (void *)original_sys_chdir;
 
     enable_write_protection();
     printk("<0>""rm hook success!\n");
