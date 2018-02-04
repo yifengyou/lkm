@@ -51,13 +51,13 @@ asmlinkage ret rt_sys_##name(args)
 
 // replace the original system call
 #define RT_SYSCALL_REPLACE(name) {\
-orig_sys_##name.val = sys_call_table[__NR_##name];\
-sys_call_table[__NR_##name] = (unsigned long)(rt_sys_##name);\
+orig_sys_##name.val = (unsigned long)sys_call_table[__NR_##name];\
+sys_call_table[__NR_##name] = (void *)(rt_sys_##name);\
 }
 
 // restore the system call
 #define RT_SYSCALL_RESTORE(name) {\
-sys_call_table[__NR_##name] = (unsigned long)(orig_sys_##name.val);\
+sys_call_table[__NR_##name] = (void *)(orig_sys_##name.val);\
 }
 
 

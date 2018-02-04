@@ -26,6 +26,7 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <codeAssistance>
+        <buildAnalyzer>false</buildAnalyzer>
       </codeAssistance>
       <makefileType>
         <makeTool>

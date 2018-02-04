@@ -221,8 +221,6 @@ RT_SYSCALL_DEFINE(int, waitpid, pid_t pid, int __user *stat_addr, int options) {
     return ret;
 }
 
-
-
 static unsigned long **find_sys_call_table(void) {
     unsigned long vaddr_number;
 
