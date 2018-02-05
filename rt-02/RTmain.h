@@ -35,7 +35,7 @@ if(args1) call(args1);\
 
 #endif 
 
-
+extern unsigned long **sys_call_table;
 
 
 // define a struct to save system call
@@ -78,7 +78,7 @@ asmlinkage ret rt_sys_##name(args)
 // replace the original system call
 #define RT_SYSCALL_REPLACE_JMP(name) {\
     poffset_##name = (unsigned char*)sys_call_table[__NR_##name];\
-    for (;(unsigned int)poffset_##name < sys_call_table[__NR_##name] + 16; poffset_##name++)\
+    for (;(unsigned int)poffset_##name < (unsigned int)sys_call_table[__NR_##name] + 16; poffset_##name++)\
     {\
         if ((unsigned char)(*poffset_##name++) == (unsigned char)(0xE9))\
         {\
@@ -107,5 +107,7 @@ struct linux_dirent {
 };
 
 
+void disable_write_protection(void);
+void enable_write_protection(void);
 
 #endif // __RT_ONLINE__

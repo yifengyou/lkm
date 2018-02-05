@@ -3,6 +3,7 @@
 
 #include "RTmain.h"
 
-
+extern unsigned int addr_do_fork;
+unsigned int find_do_fork(void);
 
 #endif
