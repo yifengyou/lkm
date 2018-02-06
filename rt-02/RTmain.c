@@ -162,6 +162,20 @@ RT_SYSCALL_DEFINE(long, socketcall, int call, unsigned long __user * args) {
 }
 
 /**
+ * sysinfo - 116 - kernel/sys.c
+ * 
+ */
+#define DEBUG_SYSINFO
+RT_SYSCALL_DEFINE(long, sysinfo, struct sysinfo __user *info) {
+    int ret;
+#ifdef DEBUG_SYSINFO
+    DLog("sysinfo");
+#endif      
+    ret = RT_SYSCALL_CALL(sysinfo, info);
+    return ret;
+}
+
+/**
  * clone - 120 - kernel/process.c
  * 
  */
@@ -227,42 +241,99 @@ RT_SYSCALL_DEFINE_JMP(long, clone, unsigned long clone_flags, unsigned long news
 }
 
 /**
+ * init_module - 128 - kernel/module.c
+ * insmod时候，在系统内部会调用sys_init_module() 去找到init_module函数的入口地址
+ * 
  */
-
-/**
- */
-
-/**
- */
-
-/**
- */
-
-/**
- */
-
-/**
- */
-
-/**
- */
-
-
+#define DEBUG_INIT_MODULE
 RT_SYSCALL_DEFINE(long, init_module, void __user *umod, unsigned long len,
         const char __user *uargs) {
     int ret;
+    
+#ifdef DEBUG_INIT_MODULE
+    DLog("init_module:len:[%ld]", len );
+#endif        
+    
     ret = RT_SYSCALL_CALL(init_module, umod, len, uargs);
     return ret;
 }
 
-// sys_getdents
+/**
+ * sys_getpgid - 20 - 	kernel/sys.c
+ * 取得目前 process 的 thread ID (process ID)
+ * 
+ */
+#define DEBUG_GETPGID
+RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
+    long ret;
+#ifdef DEBUG_GETPGID
+    DLog("getpgid:pdid:[%d]", pid );
+#endif          
+    ret = RT_SYSCALL_CALL(getpgid, pid);
+    return ret;
+}
 
+/**
+ * getdents - 141 - fs/readdir.c
+ * fd指目录文件描述符。可以用sys_open创建。
+ * dirp指目录信息，其大小由第3个参数指定，dirp在使用时注意先分配内存。
+ * count 目录信息的大小。如果count指定的比较小，可以通过循环，反复获取接下来的dirp.
+ * getdents, getdents64 - get directory entries
+ */
+#define DEBUG_GETDENTS
 RT_SYSCALL_DEFINE(long, getdents, unsigned int fd,
         struct linux_dirent __user* dirp, unsigned int count) {
     int ret;
+#ifdef DEBUG_GETDENTS
+    DLog("getdents:fd:[%d],count:[%d]", fd ,count);
+#endif        
     ret = RT_SYSCALL_CALL(getdents, fd, dirp, count);
     return ret;
 }
+
+/**
+ * sched_getparam - 155 - kernel/sched/core.c
+ * set and get scheduling parameters
+ * 
+ */
+#define DEBUG_SCHED_GETPARAM
+RT_SYSCALL_DEFINE(long, sched_getparam, pid_t pid,
+        struct sched_param __user *param) {
+    int ret;
+#ifdef DEBUG_SCHED_GETPARAM
+    DLog("sched_getparam:pid:[%d]", pid);
+#endif       
+    ret = RT_SYSCALL_CALL(sched_getparam, pid, param);
+    return ret;
+}
+
+/**
+ * sched_getscheduler - 157 - kernel/sched/core.c
+ * get scheduling policy/parameters
+ */
+#define DEBUG_SCHED_GETSCHEDULER
+RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
+    int ret;
+#ifdef DEBUG_SCHED_GETSCHEDULER
+    DLog("sched_getscheduler:pid:[%d]", pid);
+#endif        
+    ret = RT_SYSCALL_CALL(sched_getscheduler, pid);
+    return ret;
+}
+
+/**
+ */
+
+/**
+ */
+
+/**
+ */
+
+
+
+
+
 
 // sys_getdents64
 
@@ -273,29 +344,8 @@ RT_SYSCALL_DEFINE(long, getdents64, unsigned int fd,
     return ret;
 }
 
-/**
- * sys_getpgid - 20号
- * 取得目前 process 的 thread ID (process ID)
- * 
- */
-RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
-    long ret;
-    ret = RT_SYSCALL_CALL(getpgid, pid);
-    return ret;
-}
 
-RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
-    int ret;
-    ret = RT_SYSCALL_CALL(sched_getscheduler, pid);
-    return ret;
-}
 
-RT_SYSCALL_DEFINE(long, sched_getparam, pid_t pid,
-        struct sched_param __user *param) {
-    int ret;
-    ret = RT_SYSCALL_CALL(sched_getparam, pid, param);
-    return ret;
-}
 
 RT_SYSCALL_DEFINE(long, sched_getaffinity, pid_t pid, unsigned int len,
         unsigned long __user *user_mask_ptr) {
@@ -311,11 +361,7 @@ RT_SYSCALL_DEFINE(long, sched_rr_get_interval, pid_t pid,
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, sysinfo, struct sysinfo __user *info) {
-    int ret;
-    ret = RT_SYSCALL_CALL(sysinfo, info);
-    return ret;
-}
+
 
 
 #if BITS_PER_LONG == 32
@@ -413,7 +459,13 @@ ThisInit(void) {
     RT_SYSCALL_REPLACE(getsid); //66
     RT_SYSCALL_REPLACE(getpriority); //96
     RT_SYSCALL_REPLACE(socketcall); //102
-    RT_SYSCALL_REPLACE_JMP(clone); //120
+    RT_SYSCALL_REPLACE(sysinfo); //116
+    //RT_SYSCALL_REPLACE_JMP(clone); //120
+    RT_SYSCALL_REPLACE(init_module); //128
+    RT_SYSCALL_REPLACE(getpgid); //132
+    RT_SYSCALL_REPLACE(getdents); //141
+    RT_SYSCALL_REPLACE(sched_getparam); //155
+    RT_SYSCALL_REPLACE(sched_getscheduler); //157
 
     enable_write_protection();
     //  local_irq_restore(irq_flags);
@@ -433,7 +485,13 @@ ThisExit(void) {
     RT_SYSCALL_RESTORE(getsid); //66
     RT_SYSCALL_RESTORE(getpriority); //96
     RT_SYSCALL_RESTORE(socketcall); //102
-    RT_SYSCALL_RESTORE_JMP(clone); //120
+    RT_SYSCALL_RESTORE(sysinfo); //116
+    //RT_SYSCALL_RESTORE_JMP(clone); //120
+    RT_SYSCALL_RESTORE(init_module); //128
+    RT_SYSCALL_RESTORE(getpgid); //132
+    RT_SYSCALL_RESTORE(getdents); //141
+    RT_SYSCALL_RESTORE(sched_getparam); //155
+    RT_SYSCALL_RESTORE(sched_getscheduler); //157
 
     enable_write_protection();
 
