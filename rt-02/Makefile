@@ -5,7 +5,7 @@ INCLUDESDIR := ./
 KBUILD_CFLAGS   += -Wno-sizeof-pointer-memaccess
 EXTRA_CFLAGS += -I $(INCLUDESDIR) 
 
-$(MODULE_NAME)-objs = RTmain.o RTsyscalltable.o
+$(MODULE_NAME)-objs = RTmain.o RTsyscalltable.o RTlist.o RTcmd.o
 
 obj-m += $(MODULE_NAME).o 
 

