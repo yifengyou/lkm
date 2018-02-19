@@ -1,7 +1,20 @@
-#include "RTmain.h"
-
-#ifndef __RT_LIST__
-#define __RT_LIST__
+#ifndef __LIST__
+#define __LIST__
+#include "config.h"
+#include <linux/file.h>
+#include <linux/dirent.h>
+#include <linux/fs_struct.h>
+#include <linux/sched.h>
+#include <linux/fdtable.h>
+#include <linux/errno.h>
+#include <linux/list.h>
+#include <net/tcp.h>
+#include <linux/in.h>
+#include <linux/module.h> /* module_init module_exit */
+#include <linux/init.h> /* __init __exit */
+#include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
+#include <linux/delay.h> /* loops_per_jiffy */
+#include <asm/bitops.h> /* set_bit clear_bit */
 
 struct list_int
 {

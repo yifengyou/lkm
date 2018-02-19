@@ -1,5 +1,5 @@
-#include "RTcmd.h"
-#include "RTlist.h"
+#include "cmd.h"
+#include "list.h"
 
 //创建四个双向循环链表，没有数据域
 LIST_HEAD(list_files);

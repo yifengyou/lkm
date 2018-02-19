@@ -1,11 +1,8 @@
-#ifndef __RT_CMD__
-#define __RT_CMD__
+#ifndef __CMD__
+#define __CMD__
 
-#include "RTmain.h"
-
-
+#include "main.h"
 #define MAX_MODULE            0xFF
-
 #define MODULE_GENERAL        0xFF // general
 #define MODULE_MAIN           0x00 // main module
 #define MODULE_WORK           0x01 // work module

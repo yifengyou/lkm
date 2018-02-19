@@ -5,12 +5,12 @@ INCLUDESDIR := ./
 KBUILD_CFLAGS   += -Wno-sizeof-pointer-memaccess
 EXTRA_CFLAGS += -I $(INCLUDESDIR) 
 
-$(MODULE_NAME)-objs = RTmain.o RTsyscalltable.o RTlist.o RTcmd.o
+$(MODULE_NAME)-objs = main.o syscalltable.o list.o cmd.o  
 
 obj-m += $(MODULE_NAME).o 
 
 default:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules 
-	rm -rf  *.mod.c  modules.order Module.symvers .RT* .rootkit* .tmp*
+	rm -rf  *.mod.c  modules.order Module.symvers  .rootkit* .tmp*
 clean:
-	rm -rf *.o *.ko *.mod.c  modules.order Module.symvers .Rt* .rootkit* .tmp*
+	rm -rf *.o *.ko *.mod.c  modules.order Module.symvers .rootkit* .tmp*
