@@ -24,6 +24,9 @@ struct linux_dirent {
 };
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 #endif // __MAIN__

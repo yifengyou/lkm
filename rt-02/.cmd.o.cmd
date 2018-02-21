@@ -1267,9 +1267,15 @@ deps_/root/lkm/rt-02/cmd.o := \
     $(wildcard include/config/have/perf/regs.h) \
   arch/x86/include/uapi/asm/perf_regs.h \
   arch/x86/include/asm/local.h \
+<<<<<<< HEAD
   /root/lkm/rt-02/config.h \
     $(wildcard include/config//.h) \
   /root/lkm/rt-02/list.h \
+=======
+  /root/lkm/rt-02/list.h \
+  /root/lkm/rt-02/config.h \
+    $(wildcard include/config//.h) \
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 
 /root/lkm/rt-02/cmd.o: $(deps_/root/lkm/rt-02/cmd.o)
 
