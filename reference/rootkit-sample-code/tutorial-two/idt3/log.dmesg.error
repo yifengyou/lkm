@@ -1,0 +1,30 @@
+[ 2131.004964] BUG: unable to handle kernel paging request at bfa5b870
+[ 2131.005033] IP: [<c12f8f5e>] strnlen+0xe/0x20
+[ 2131.005075] *pdpt = 00000000352a8001 *pde = 000000007e87b067 
+[ 2131.005122] Oops: 0001 [#4] SMP 
+[ 2131.005155] Modules linked in: sys_mkdir(OF) crc32_pclmul aesni_intel aes_i586 xts lrw gf128mul ablk_helper cryptd parport_pc ppdev lp vmw_balloon serio_raw vmw_vmci parport psmouse ahci libahci mptspi mptscsih pcnet32 mptbase mii [last unloaded: sys_mkdir]
+[ 2131.005356] CPU: 1 PID: 6551 Comm: mkdir Tainted: PF     D    O 3.13.0-24-generic #47-Ubuntu
+[ 2131.005428] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 05/19/2017
+[ 2131.005512] task: f2980cf0 ti: e8466000 task.ti: e8466000
+[ 2131.005555] EIP: 0060:[<c12f8f5e>] EFLAGS: 00010097 CPU: 1
+[ 2131.005600] EIP is at strnlen+0xe/0x20
+[ 2131.005633] EAX: bfa5b870 EBX: c1aa9e2e ECX: bfa5b870 EDX: fffffffe
+[ 2131.005692] ESI: bfa5b870 EDI: c1aaa200 EBP: e8467ec8 ESP: e8467ec8
+[ 2131.005740]  DS: 007b ES: 007b FS: 00d8 GS: 00e0 SS: 0068
+[ 2131.005790] CR0: 80050033 CR2: bfa5b870 CR3: 284f3000 CR4: 003407f0
+[ 2131.005895] Stack:
+[ 2131.005920]  e8467ee0 c12f5e4f 0000ffff e8467fa8 f848e037 c1aa9e2e e8467f24 c12f7196
+[ 2131.005995]  00000000 e84affff 0000ffff 00000000 00000000 fffa5260 c1aa9e20 000003e0
+[ 2131.006069]  c1aaa200 00000002 ff0a0004 ffffffff 000003e0 00000001 00000000 e8467f34
+[ 2131.006143] Call Trace:
+[ 2131.006172]  [<c12f5e4f>] string.isra.6+0x2f/0xc0
+[ 2131.006211]  [<c12f7196>] vsnprintf+0x166/0x3d0
+[ 2131.006250]  [<c12f7416>] vscnprintf+0x16/0x30
+[ 2131.006289]  [<c10a3a64>] vprintk_emit+0x124/0x520
+[ 2131.006330]  [<c1647402>] printk+0x50/0x52
+[ 2131.006367]  [<f848d027>] rt_sys_mkdir+0x27/0x40 [sys_mkdir]
+[ 2131.006412]  [<c1659bcd>] sysenter_do_call+0x12/0x28
+[ 2131.006452] Code: 57 3e 8d 74 26 00 85 c9 89 c7 74 07 89 d0 f2 ae 75 01 4f 89 f8 5f 5d c3 90 8d 74 26 00 55 89 e5 3e 8d 74 26 00 89 c1 89 c8 eb 06 <80> 38 00 74 07 40 4a 83 fa ff 75 f4 29 c8 5d c3 90 90 55 89 e5
+[ 2131.006662] EIP: [<c12f8f5e>] strnlen+0xe/0x20 SS:ESP 0068:e8467ec8
+[ 2131.006712] CR2: 00000000bfa5b870
+[ 2131.006862] ---[ end trace ff7b775ed0a18b20 ]---

@@ -1,0 +1,9 @@
+!SESSION 2018-02-04 13:29:24.770 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=zh_CN
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.cdt.core 1 0 2018-02-04 13:30:50.276
+!MESSAGE Indexed 'rootkit' (0 sources, 0 headers) in 0.00 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)

@@ -1,0 +1,1 @@
+cmd_/root/lkm/rootkit-sample-code/tutorial-two/system.map2/sys_open.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.13.0-24-generic/scripts/module-common.lds --build-id  -o /root/lkm/rootkit-sample-code/tutorial-two/system.map2/sys_open.ko /root/lkm/rootkit-sample-code/tutorial-two/system.map2/sys_open.o /root/lkm/rootkit-sample-code/tutorial-two/system.map2/sys_open.mod.o

@@ -1,0 +1,1 @@
+cmd_/root/lkm/reference/hook/hook/hook.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /root/lkm/reference/hook/hook/hook.ko /root/lkm/reference/hook/hook/hook.o /root/lkm/reference/hook/hook/hook.mod.o

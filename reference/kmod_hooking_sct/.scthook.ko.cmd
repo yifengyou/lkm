@@ -1,0 +1,1 @@
+cmd_/root/lkm/reference/kmod_hooking_sct/scthook.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /root/lkm/reference/kmod_hooking_sct/scthook.ko /root/lkm/reference/kmod_hooking_sct/scthook.o /root/lkm/reference/kmod_hooking_sct/scthook.mod.o

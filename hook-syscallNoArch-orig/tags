@@ -1,0 +1,19 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+HOOK_SYS_H	hook_sys.h	15;"	d
+disable_write_protection	hook_sys.c	/^static void disable_write_protection(void) {$/;"	f	file:
+enable_write_protection	hook_sys.c	/^static void enable_write_protection(void) {$/;"	f	file:
+find_sys_call_table	hook_sys.c	/^static unsigned long **find_sys_call_table(void) {$/;"	f	file:
+hook_sys_mkdir_exit	hook_sys.c	/^module_exit(hook_sys_mkdir_exit);$/;"	v
+hook_sys_mkdir_exit	hook_sys.c	/^static void __exit hook_sys_mkdir_exit(void) {$/;"	f	file:
+hook_sys_mkdir_init	hook_sys.c	/^module_init(hook_sys_mkdir_init);$/;"	v
+hook_sys_mkdir_init	hook_sys.c	/^static int __init hook_sys_mkdir_init(void) {$/;"	f	file:
+new_sys_chdir	hook_sys.c	/^static asmlinkage long new_sys_chdir(const char __user *pathname) {$/;"	f	file:
+new_sys_mkdir	hook_sys.c	/^static asmlinkage long new_sys_mkdir(const char __user *pathname, umode_t mode) {$/;"	f	file:
+original_sys_chdir	hook_sys.c	/^static asmlinkage long (*original_sys_chdir)(const char __user *pathname);$/;"	v	file:
+original_sys_mkdir	hook_sys.c	/^static asmlinkage long (*original_sys_mkdir)(const char __user *pathname, umode_t mode);$/;"	v	file:
+sys_call_table	hook_sys.c	/^static unsigned long **sys_call_table;$/;"	v	file:

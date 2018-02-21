@@ -1,0 +1,1 @@
+cmd_/root/lkm/rootkit-sample-code/tutorial-two/idt2/lkm3.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.13.0-24-generic/scripts/module-common.lds --build-id  -o /root/lkm/rootkit-sample-code/tutorial-two/idt2/lkm3.ko /root/lkm/rootkit-sample-code/tutorial-two/idt2/lkm3.o /root/lkm/rootkit-sample-code/tutorial-two/idt2/lkm3.mod.o
