@@ -1269,14 +1269,9 @@ deps_/root/lkm/rt-02/main.o := \
   /root/lkm/rt-02/config.h \
     $(wildcard include/config//.h) \
   /root/lkm/rt-02/syscalltable.h \
-<<<<<<< HEAD
   /root/lkm/rt-02/util.h \
   /root/lkm/rt-02/cmd.h \
   /root/lkm/rt-02/list.h \
-=======
-  /root/lkm/rt-02/list.h \
-  /root/lkm/rt-02/cmd.h \
->>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 
 /root/lkm/rt-02/main.o: $(deps_/root/lkm/rt-02/main.o)
 

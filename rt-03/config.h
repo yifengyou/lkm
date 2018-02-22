@@ -3,6 +3,7 @@
 
 
 #define DEBUG
+<<<<<<< HEAD
 
 // maximum length of the path
 #define MAX_PATH 260
@@ -19,6 +20,9 @@
 /* maximized args number that audit_socketcall can process */
 #define AUDITSC_ARGS		6
 
+=======
+#define MAX_PATH 1020
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 
 #ifdef DEBUG  
 # define DLog(fmt, ... ) printk(("Rootkit:%s-[%s]:%d " fmt "\n"), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);  

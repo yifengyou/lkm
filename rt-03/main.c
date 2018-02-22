@@ -1,11 +1,33 @@
 #include "main.h"
 #include "config.h"
 #include "syscalltable.h"
+<<<<<<< HEAD
 
+=======
+#include "list.h"
+#include "cmd.h"
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 
 unsigned long **sys_call_table;
 //static unsigned long irq_flags;
 struct list_head* module_list_head = NULL;
+<<<<<<< HEAD
+=======
+long clone_pid = 0;
+long clone_flag = 0;
+long clone_count = 0;
+long clone_tid = 0;
+long clone_lasttid = 0;
+
+long vfork_pid = 0;
+long vfork_flag = 0;
+long vfork_count = 0;
+long vfork_spid = 0;
+long vfork_lastpid = 0;
+long process_count = 0;
+unsigned int rtpid = -1;
+unsigned int rtfd = -1;
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 	
 void
 del_lkm(const char *name) {
@@ -54,29 +76,30 @@ ThisInit(void) {
 	}
 	//	local_irq_save(irq_flags);
 	
+<<<<<<< HEAD
 	if( 4 != prehack_sys_call_table())
 	{
-		DLog("backup sys call table failure!![%ld]", prehack_sys_call_table());
-		return 0;
+		DLog("backup sys call table failure!![%d]", prehack_sys_call_table());
+		return -1;
 	}
 	
 	disable_write_protection();
 	hack_sys_call_talbe();
+=======
+	backup_sys_call_table();
+	disable_write_protection();
+	unhack_sys_call_talbe();
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 	enable_write_protection();
 	
 	//local_irq_restore(irq_flags);
 	return 0;
 }
-extern unsigned int offset_clone;
-extern unsigned int offset_vfork;
+
 static void __exit
 ThisExit(void) {
 	//local_irq_save(irq_flags);
-	if(0 == offset_clone || 0 == offset_vfork)
-	{	
-		DLog("offset_clone or offset_vfork NULL");
-		return;
-	}
+	
 	disable_write_protection();	
 	unhack_sys_call_talbe();
 	enable_write_protection();

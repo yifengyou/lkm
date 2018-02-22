@@ -189,21 +189,19 @@ long prehack_sys_call_table(void)
 	
 	//针对特殊的sys_clone系统调用
 	//original_sys_clone = (void *)sys_call_table[__NR_clone];    	//120 - 9
-	DLog("original_sys_clone addr[0x%x]", (unsigned int)sys_call_table[__NR_clone]);
+	DLog("original_sys_sysinfo addr[0x%x]", (unsigned int)sys_call_table[__NR_clone]);
 	poffset_clone = (void *)sys_call_table[__NR_clone];
-	for (; (unsigned int)poffset_clone < (unsigned int)sys_call_table[__NR_clone] + 256; poffset_clone++)
+	for (; (unsigned int)poffset_clone < (unsigned int)sys_call_table[__NR_clone] + 16; poffset_clone++)
 	{
-		printk(" 0x%X ",(unsigned char)(*poffset_clone));
-		if ((unsigned char)(*poffset_clone) == (unsigned char)(0xE9))
+		if ((unsigned char)(*poffset_clone++) == (unsigned char)(0xE9))
 		{
 			offset_clone = *((unsigned int *)poffset_clone);
 			original_sys_clone = (void *)((unsigned int)poffset_clone + 4 + offset_clone);
 			ret += 2;
 			break;
 		}
-		//poffset_clone++;
 	}
-	printk("\n");
+
 	original_sys_init_module = (void *)sys_call_table[__NR_init_module];    	//128 - 10
 	DLog("original_sys_init_module addr[0x%x]", (unsigned int)sys_call_table[__NR_init_module]);
 	original_sys_getpgid = (void *)sys_call_table[__NR_getpgid];    	//132 - 11
@@ -220,19 +218,16 @@ long prehack_sys_call_table(void)
 	//original_sys_vfork = (void *)sys_call_table[__NR_vfork];      	//190 - 16
 	DLog("original_sys_vfork addr[0x%x]", (unsigned int)sys_call_table[__NR_vfork]);
 	poffset_vfork = (void *)sys_call_table[__NR_vfork];
-	for (; (unsigned int)poffset_vfork < (unsigned int)sys_call_table[__NR_vfork] + 256; poffset_vfork++)
+	for (; (unsigned int)poffset_vfork < (unsigned int)sys_call_table[__NR_vfork] + 16; poffset_vfork++)
 	{
-		printk(" 0x%X ", (unsigned char)(*poffset_vfork));
-		if ((unsigned char)(*poffset_vfork) == (unsigned char)(0xE9))
+		if ((unsigned char)(*poffset_vfork++) == (unsigned char)(0xE9))
 		{
 			offset_vfork = *((unsigned int *)poffset_vfork);
 			original_sys_vfork = (void *)(unsigned int)poffset_vfork + 4 + offset_vfork;
 			ret += 3;
 			break;
 		}
-		//poffset_vfork++;
 	}
-	printk("\n");
 #if BITS_PER_LONG == 32
 	original_sys_stat64 = (void *)sys_call_table[__NR_stat64];    	//195 - 17
 	DLog("original_sys_stat64 addr[0x%x]", (unsigned int)sys_call_table[__NR_stat64]);

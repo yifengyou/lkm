@@ -2,8 +2,11 @@
 #define __CMD__
 
 #include "main.h"
+<<<<<<< HEAD
 #include "config.h"
 
+=======
+>>>>>>> 884f7fbed93b1f333a0ad3295fe448314d32affa
 #define MAX_MODULE            0xFF
 #define MODULE_GENERAL        0xFF // general
 #define MODULE_MAIN           0x00 // main module

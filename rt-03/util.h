@@ -1,6 +1,5 @@
-#ifndef __MAIN__
-#define __MAIN__
-
+#ifndef __UTIL__
+#define __UTIL__
 #include <linux/file.h>
 #include <linux/dirent.h>
 #include <linux/fs_struct.h>
@@ -15,15 +14,11 @@
 #include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
 #include <linux/delay.h> /* loops_per_jiffy */
 #include <asm/bitops.h> /* set_bit clear_bit */
+#include "config.h"
 
-struct linux_dirent {
-	unsigned long d_ino;
-	unsigned long d_off;
-	unsigned short d_reclen;
-	char d_name[1];
-};
+unsigned int atoi(char *str);
+const char *get_fullpath(char *fullpath, int size, struct dentry *pd);
+const char *get_path(char *fullpath, int size, unsigned int fd);
 
+#endif // __UTIL__
 
-
-
-#endif // __MAIN__

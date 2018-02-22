@@ -1,9 +1,9 @@
-cmd_/root/lkm/rt-02/syscalltable.o := gcc -Wp,-MD,/root/lkm/rt-02/.syscalltable.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.8/include  -I./arch/x86/include -Iarch/x86/include/generated/uapi -Iarch/x86/include/generated  -Iinclude -I./arch/x86/include/uapi -Iarch/x86/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -Iubuntu/include  -D__KERNEL__ -fno-pie -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-PIE -fno-pie -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -m32 -msoft-float -mregparm=3 -freg-struct-return -fno-pic -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -DCONFIG_AS_SSSE3=1 -DCONFIG_AS_CRC32=1 -DCONFIG_AS_AVX=1 -DCONFIG_AS_AVX2=1 -DCONFIG_AS_SHA1_NI=1 -DCONFIG_AS_SHA256_NI=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -Wno-maybe-uninitialized -O2 --param=allow-store-data-races=0 -DCC_HAVE_ASM_GOTO -Wframe-larger-than=1024 -fstack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Wno-sizeof-pointer-memaccess -I ./  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(syscalltable)"  -D"KBUILD_MODNAME=KBUILD_STR(rootkit)" -c -o /root/lkm/rt-02/.tmp_syscalltable.o /root/lkm/rt-02/syscalltable.c
+cmd_/root/lkm/rt-02/util.o := gcc -Wp,-MD,/root/lkm/rt-02/.util.o.d  -nostdinc -isystem /usr/lib/gcc/i686-linux-gnu/4.8/include  -I./arch/x86/include -Iarch/x86/include/generated/uapi -Iarch/x86/include/generated  -Iinclude -I./arch/x86/include/uapi -Iarch/x86/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -Iubuntu/include  -D__KERNEL__ -fno-pie -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -std=gnu89 -fno-PIE -fno-pie -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -m32 -msoft-float -mregparm=3 -freg-struct-return -fno-pic -mpreferred-stack-boundary=2 -march=i686 -mtune=generic -maccumulate-outgoing-args -Wa,-mtune=generic32 -ffreestanding -DCONFIG_AS_CFI=1 -DCONFIG_AS_CFI_SIGNAL_FRAME=1 -DCONFIG_AS_CFI_SECTIONS=1 -DCONFIG_AS_SSSE3=1 -DCONFIG_AS_CRC32=1 -DCONFIG_AS_AVX=1 -DCONFIG_AS_AVX2=1 -DCONFIG_AS_SHA1_NI=1 -DCONFIG_AS_SHA256_NI=1 -pipe -Wno-sign-compare -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -Wno-maybe-uninitialized -O2 --param=allow-store-data-races=0 -DCC_HAVE_ASM_GOTO -Wframe-larger-than=1024 -fstack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -pg -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -Werror=implicit-int -Werror=strict-prototypes -Wno-sizeof-pointer-memaccess -I ./  -DMODULE  -D"KBUILD_STR(s)=\#s" -D"KBUILD_BASENAME=KBUILD_STR(util)"  -D"KBUILD_MODNAME=KBUILD_STR(rootkit)" -c -o /root/lkm/rt-02/.tmp_util.o /root/lkm/rt-02/util.c
 
-source_/root/lkm/rt-02/syscalltable.o := /root/lkm/rt-02/syscalltable.c
+source_/root/lkm/rt-02/util.o := /root/lkm/rt-02/util.c
 
-deps_/root/lkm/rt-02/syscalltable.o := \
-  /root/lkm/rt-02/syscalltable.h \
+deps_/root/lkm/rt-02/util.o := \
+  /root/lkm/rt-02/util.h \
   include/linux/file.h \
   include/linux/compiler.h \
     $(wildcard include/config/sparse/rcu/pointer.h) \
@@ -1268,11 +1268,7 @@ deps_/root/lkm/rt-02/syscalltable.o := \
   arch/x86/include/asm/local.h \
   /root/lkm/rt-02/config.h \
     $(wildcard include/config//.h) \
-  /root/lkm/rt-02/util.h \
-  /root/lkm/rt-02/cmd.h \
-  /root/lkm/rt-02/main.h \
-  /root/lkm/rt-02/list.h \
 
-/root/lkm/rt-02/syscalltable.o: $(deps_/root/lkm/rt-02/syscalltable.o)
+/root/lkm/rt-02/util.o: $(deps_/root/lkm/rt-02/util.o)
 
-$(deps_/root/lkm/rt-02/syscalltable.o):
+$(deps_/root/lkm/rt-02/util.o):
