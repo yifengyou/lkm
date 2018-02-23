@@ -14,7 +14,7 @@
 #include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
 #include <linux/delay.h> /* loops_per_jiffy */
 #include <asm/bitops.h> /* set_bit clear_bit */
-#include "config.h"
+#include "main.h"
 
 unsigned int atoi(char *str);
 const char *get_fullpath(char *fullpath, int size, struct dentry *pd);

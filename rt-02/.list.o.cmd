@@ -4,8 +4,6 @@ source_/root/lkm/rt-02/list.o := /root/lkm/rt-02/list.c
 
 deps_/root/lkm/rt-02/list.o := \
   /root/lkm/rt-02/list.h \
-  /root/lkm/rt-02/config.h \
-    $(wildcard include/config//.h) \
   include/linux/file.h \
   include/linux/compiler.h \
     $(wildcard include/config/sparse/rcu/pointer.h) \
@@ -1268,6 +1266,7 @@ deps_/root/lkm/rt-02/list.o := \
     $(wildcard include/config/have/perf/regs.h) \
   arch/x86/include/uapi/asm/perf_regs.h \
   arch/x86/include/asm/local.h \
+  /root/lkm/rt-02/main.h \
 
 /root/lkm/rt-02/list.o: $(deps_/root/lkm/rt-02/list.o)
 

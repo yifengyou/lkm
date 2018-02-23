@@ -1266,8 +1266,7 @@ deps_/root/lkm/rt-02/util.o := \
     $(wildcard include/config/have/perf/regs.h) \
   arch/x86/include/uapi/asm/perf_regs.h \
   arch/x86/include/asm/local.h \
-  /root/lkm/rt-02/config.h \
-    $(wildcard include/config//.h) \
+  /root/lkm/rt-02/main.h \
 
 /root/lkm/rt-02/util.o: $(deps_/root/lkm/rt-02/util.o)
 

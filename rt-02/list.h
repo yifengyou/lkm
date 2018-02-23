@@ -1,6 +1,5 @@
 #ifndef __LIST__
 #define __LIST__
-#include "config.h"
 #include <linux/file.h>
 #include <linux/dirent.h>
 #include <linux/fs_struct.h>
@@ -15,6 +14,7 @@
 #include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
 #include <linux/delay.h> /* loops_per_jiffy */
 #include <asm/bitops.h> /* set_bit clear_bit */
+#include "main.h"
 
 struct list_int
 {
