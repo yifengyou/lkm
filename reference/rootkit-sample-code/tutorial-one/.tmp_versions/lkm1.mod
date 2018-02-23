@@ -1,2 +1,2 @@
-/root/rootkit-sample-code/tutorial-one/lkm1.ko
-/root/rootkit-sample-code/tutorial-one/lkm1.o
+/root/lkm/reference/rootkit-sample-code/tutorial-one/lkm1.ko
+/root/lkm/reference/rootkit-sample-code/tutorial-one/lkm1.o

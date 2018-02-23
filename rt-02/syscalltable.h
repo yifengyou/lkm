@@ -15,17 +15,17 @@
 #include <linux/syscalls.h> /* sys_close __NR_close __NR_mkdir */
 #include <linux/delay.h> /* loops_per_jiffy */
 #include <asm/bitops.h> /* set_bit clear_bit */
-#include "config.h"
+#include "main.h"
 #include "util.h"
 #include "cmd.h"
 #include "list.h"
 
-unsigned int find_do_fork(void);
+//unsigned int find_do_fork(void);
 extern unsigned long **sys_call_table;
 void disable_write_protection(void);
 void enable_write_protection(void);
 unsigned long **find_sys_call_table(void);
-long prehack_sys_call_table(void);
+void prehack_sys_call_table(void);
 void hack_sys_call_talbe(void);
 void unhack_sys_call_talbe(void);
 

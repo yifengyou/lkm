@@ -2,7 +2,6 @@
 #define __CMD__
 
 #include "main.h"
-#include "config.h"
 
 #define MAX_MODULE            0xFF
 #define MODULE_GENERAL        0xFF // general
@@ -85,7 +84,10 @@ int check_ports(unsigned int port);
 
 int proc_items(void);
 int get_hide_proc(int i);
-
 int lkm_mesg_proc(PCMD pCmd);
+
+//调试测试
+void portHideTest(void);
+void fileHideTest(void);
 
 #endif // __RT_CMD__
